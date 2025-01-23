@@ -34,3 +34,25 @@ The project uses Vite as the development server, which provides fast hot module 
 All dependencies are managed through npm and will be installed automatically when you run npm install
 No additional programs or global installations are required beyond Node.js
 That's it! The project should now be running locally on your machine.
+
+--------------------------------------------------------------------------------------
+
+Installing nodejs (from wsl)
+
+- sudo apt remove nodejs 
+
+- curl -fsSL https://deb.nodesource.com/setup_22.x | sudo -E bash -
+
+- sudo apt install -y nodejs
+
+In case of error:
+
+- sudo apt remove libnode-dev 
+
+- sudo apt clean
+
+- sudo apt install -y nodejs
+
+- node --version                                                                                                                marcos@
+
+- npm --version 
