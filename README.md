@@ -4,7 +4,7 @@ Required Programs:
 
 Node.js - Version 18.x or higher
 Download from: https://nodejs.org/
-Steps to Run:
+Steps to Run
 
 Install Node.js
 
