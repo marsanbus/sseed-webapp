@@ -31,7 +31,7 @@ const Sidebar: React.FC<SidebarProps> = ({ menuItems, activeTab, setActiveTab })
                 }`}
               >
                 <Icon className="h-5 w-5 mr-3" />
-                <span className="font-arial">{item.label}</span>
+                <span className="font-arial" style={{ whiteSpace: 'nowrap' }}>{item.label}</span>
               </button>
             );
           })}

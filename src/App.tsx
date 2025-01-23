@@ -1,9 +1,10 @@
 import React, { useState } from 'react';
-import { Leaf, Users, Calendar, Home, MessageCircle, FileCheck, UserSquare2 } from 'lucide-react';
+import { Users, MessageCircle, UserSquare2, CopyPlus, Power } from 'lucide-react';
 import Sidebar from './components/Sidebar';
 import UserRegistration from './components/UserRegistration';
 import RegisteredUsers from './components/RegisteredUsers';
 import { User } from './types/user';
+import logo from './assets/Logotipo_Vertical_Transparente.png'
 
 function App() {
   const [activeTab, setActiveTab] = useState('register');
@@ -11,12 +12,11 @@ function App() {
   const [editingUser, setEditingUser] = useState<User | null>(null);
 
   const menuItems = [
-    { id: 'register', label: 'Dar de alta a un usuario', icon: Users },
+    { id: 'trainers', label: 'Entrenadores', icon: Users },
+    { id: 'register', label: 'Registro de Usuario', icon: CopyPlus  },
     { id: 'registered-users', label: 'Usuarios Registrados', icon: UserSquare2 },
-    { id: 'planning', label: 'Planificaciones', icon: Calendar },
-    { id: 'home-training', label: 'Entrena en casa', icon: Home },
-    { id: 'evaluate', label: 'Evaluar', icon: FileCheck },
     { id: 'forum', label: 'Foro', icon: MessageCircle },
+    { id: 'close-session', label: 'Cerrar Sesión', icon: Power  },
   ];
 
   const handleRegisterUser = (userData: Omit<User, 'id'>) => {
@@ -38,7 +38,7 @@ function App() {
       <Sidebar menuItems={menuItems} activeTab={activeTab} setActiveTab={setActiveTab} />
       <main className="flex-1 p-8">
         <div className="mb-8 flex items-center">
-          <Leaf className="h-8 w-8 text-[#5a6b47] mr-3" />
+          <img src={logo} alt="SSEED Logo" className="h-8 w-8 mr-3" />
           <h1 className="text-3xl font-bold text-[#3f3222]">SSEED</h1>
         </div>
         {activeTab === 'register' && (
