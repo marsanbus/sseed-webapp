@@ -4,7 +4,7 @@ interface LoginProps {
     onLogin: (username: string, password: string) => void;
 }
 
-const Login: React.FC<LoginProps> = ({ onLogin }) => {
+const InstitutionRegistration: React.FC<LoginProps> = ({ onLogin }) => {
     const [username, setUsername] = useState('');
     const [password, setPassword] = useState('');
 
@@ -41,4 +41,4 @@ const Login: React.FC<LoginProps> = ({ onLogin }) => {
     );
 };
 
-export default Login;
+export default InstitutionRegistration;

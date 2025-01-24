@@ -39,6 +39,7 @@ function App() {
     // Add your authentication logic here
     if (username === 'admin' && password === 'password') {
       setIsAuthenticated(true);
+      setActiveTab('registered-users');
     } else {
       alert('Invalid credentials');
     }
