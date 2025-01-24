@@ -3,6 +3,7 @@ import { Users, MessageCircle, UserSquare2, CopyPlus, Power } from 'lucide-react
 import Sidebar from './components/Sidebar';
 import UserRegistration from './components/UserRegistration';
 import RegisteredUsers from './components/RegisteredUsers';
+import InstitutionRegistration from './components/InstitutionRegistration';
 import { User } from './types/user';
 import logo from './assets/Logotipo_Vertical_Transparente.png'
 
@@ -10,6 +11,7 @@ function App() {
   const [activeTab, setActiveTab] = useState('register');
   const [users, setUsers] = useState<User[]>([]);
   const [editingUser, setEditingUser] = useState<User | null>(null);
+  const [isAuthenticated, setIsAuthenticated] = useState(false);
 
   const menuItems = [
     { id: 'trainers', label: 'Entrenadores', icon: Users },
@@ -32,6 +34,19 @@ function App() {
     setEditingUser(user);
     setActiveTab('register');
   };
+
+  const handleLogin = (username: string, password: string) => {
+    // Add your authentication logic here
+    if (username === 'admin' && password === 'password') {
+      setIsAuthenticated(true);
+    } else {
+      alert('Invalid credentials');
+    }
+  };
+
+  if (!isAuthenticated) {
+    return <InstitutionRegistration onLogin={handleLogin} />;
+  }
 
   return (
     <div className="flex min-h-screen bg-[#f5f5f0]">
