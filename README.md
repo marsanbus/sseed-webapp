@@ -207,3 +207,7 @@ const handleRegisterUser = async (userData: Omit<User, 'id'>) => {
 };
 
 This is a basic example to get you started. You can expand on this by adding more endpoints, handling errors, and securing your API.
+
+---------------------------------------------------------------------
+
+https://images.unsplash.com/photo-1518531933037-91b2f5f229cc?auto=format&fit=crop&q=80

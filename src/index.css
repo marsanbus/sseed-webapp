@@ -5,7 +5,7 @@
 @layer base {
   body {
     font-family: Arial, sans-serif;
-    background-image: url('https://images.unsplash.com/photo-1518531933037-91b2f5f229cc?auto=format&fit=crop&q=80');
+    background-image: url('./assets/output.png');
     background-size: cover;
     background-attachment: fixed;
     background-position: center;
