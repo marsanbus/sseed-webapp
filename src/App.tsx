@@ -1,11 +1,11 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { Users, MessageCircle, UserSquare2, CopyPlus, Power } from 'lucide-react';
 import Sidebar from './components/Sidebar';
 import UserRegistration from './components/UserRegistration';
 import RegisteredUsers from './components/RegisteredUsers';
 import InstitutionRegistration from './components/InstitutionRegistration';
 import { User } from './types/user';
-import logo from './assets/Logotipo_Vertical_Transparente.png'
+import logo from './assets/Logotipo_Vertical_Transparente.png';
 
 function App() {
   const [activeTab, setActiveTab] = useState('register');
@@ -15,10 +15,10 @@ function App() {
 
   const menuItems = [
     { id: 'trainers', label: 'Entrenadores', icon: Users },
-    { id: 'register', label: 'Registro de Usuario', icon: CopyPlus  },
+    { id: 'register', label: 'Registro de Usuario', icon: CopyPlus },
     { id: 'registered-users', label: 'Usuarios Registrados', icon: UserSquare2 },
     { id: 'forum', label: 'Foro', icon: MessageCircle },
-    { id: 'close-session', label: 'Cerrar Sesión', icon: Power  },
+    { id: 'close-session', label: 'Cerrar Sesión', icon: Power },
   ];
 
   const handleRegisterUser = (userData: Omit<User, 'id'>) => {
@@ -48,7 +48,13 @@ function App() {
   const handleLogout = () => {
     setIsAuthenticated(false);
     setActiveTab('register');
-  }
+  };
+
+  useEffect(() => {
+    if (activeTab === 'close-session') {
+      handleLogout();
+    }
+  }, [activeTab]);
 
   if (!isAuthenticated) {
     return <InstitutionRegistration onLogin={handleLogin} />;
@@ -74,7 +80,6 @@ function App() {
             onEditUser={handleEditUser}
           />
         )}
-        {activeTab === 'close-session' && handleLogout()}
       </main>
     </div>
   );
