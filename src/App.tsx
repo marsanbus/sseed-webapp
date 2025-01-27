@@ -8,11 +8,13 @@ import { User } from './types/user';
 import logo from './assets/Logotipo_Vertical_Transparente.png';
 
 function App() {
+  // State variables
   const [activeTab, setActiveTab] = useState('register');
   const [users, setUsers] = useState<User[]>([]);
   const [editingUser, setEditingUser] = useState<User | null>(null);
   const [isAuthenticated, setIsAuthenticated] = useState(false);
 
+  // Menu items for the sidebar
   const menuItems = [
     { id: 'trainers', label: 'Entrenadores', icon: Users },
     { id: 'register', label: 'Registro de Usuario', icon: CopyPlus },
@@ -21,6 +23,7 @@ function App() {
     { id: 'close-session', label: 'Cerrar Sesión', icon: Power },
   ];
 
+  // Handle user registration
   const handleRegisterUser = (userData: Omit<User, 'id'>) => {
     const newUser = {
       ...userData,
@@ -30,11 +33,13 @@ function App() {
     setActiveTab('registered-users');
   };
 
+  // Handle user editing
   const handleEditUser = (user: User) => {
     setEditingUser(user);
     setActiveTab('register');
   };
 
+  // Handle login
   const handleLogin = (username: string, password: string) => {
     // Add your authentication logic here
     if (username === 'admin' && password === 'password') {
@@ -45,21 +50,25 @@ function App() {
     }
   };
 
+  // Handle logout
   const handleLogout = () => {
     setIsAuthenticated(false);
     setActiveTab('register');
   };
 
+  // Effect to handle logout when the active tab is 'close-session'
   useEffect(() => {
     if (activeTab === 'close-session') {
       handleLogout();
     }
   }, [activeTab]);
 
+  // Render the login page if not authenticated
   if (!isAuthenticated) {
     return <InstitutionRegistration onLogin={handleLogin} />;
   }
 
+  // Render the main application
   return (
     <div className="flex min-h-screen bg-[#f5f5f0]">
       <Sidebar menuItems={menuItems} activeTab={activeTab} setActiveTab={setActiveTab} />

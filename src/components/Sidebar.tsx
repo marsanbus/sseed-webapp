@@ -1,18 +1,21 @@
 import React from 'react';
 import { LucideIcon } from 'lucide-react';
 
+// Define the structure of a menu item
 interface MenuItem {
   id: string;
   label: string;
   icon: LucideIcon;
 }
 
+// Define the props for the Sidebar component
 interface SidebarProps {
   menuItems: MenuItem[];
   activeTab: string;
   setActiveTab: (tab: string) => void;
 }
 
+// Sidebar component
 const Sidebar: React.FC<SidebarProps> = ({ menuItems, activeTab, setActiveTab }) => {
   return (
     <aside className="w-64 bg-white shadow-lg">

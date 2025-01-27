@@ -5,12 +5,15 @@ import MedicalAuthorization from './MedicalAuthorization';
 import PhysicalProfileQuestions from './PhysicalProfileQuestions';
 import { User } from '../types/user';
 
+// Define the props for the UserRegistration component
 interface UserRegistrationProps {
   onRegister: (userData: Omit<User, 'id'>) => void;
   initialData?: User | null;
 }
 
+// User registration component
 const UserRegistration: React.FC<UserRegistrationProps> = ({ onRegister, initialData }) => {
+  // State variables for form data
   const [formData, setFormData] = useState({
     name: '',
     birthDate: '',
@@ -29,6 +32,7 @@ const UserRegistration: React.FC<UserRegistrationProps> = ({ onRegister, initial
 
   const [physicalProfileAnswers, setPhysicalProfileAnswers] = useState<Record<number, boolean>>({});
 
+  // Effect to initialize form data if initialData is provided
   useEffect(() => {
     if (initialData) {
       setFormData({
@@ -50,6 +54,7 @@ const UserRegistration: React.FC<UserRegistrationProps> = ({ onRegister, initial
     }
   }, [initialData]);
 
+  // Handle form submission
   const handleSubmit = () => {
     const userData: Omit<User, 'id'> = {
       name: formData.name,
@@ -76,6 +81,7 @@ const UserRegistration: React.FC<UserRegistrationProps> = ({ onRegister, initial
     onRegister(userData);
   };
 
+  // Handle input changes
   const handleInputChange = (field: string, value: string | boolean | string[]) => {
     setFormData(prev => ({ ...prev, [field]: value }));
   };

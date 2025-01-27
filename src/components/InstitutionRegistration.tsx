@@ -1,13 +1,16 @@
 import React, { useState } from 'react';
 
+// Define the props for the component
 interface LoginProps {
   onLogin: (username: string, password: string) => void;
 }
 
+// Component for institution registration (login)
 const InstitutionRegistration: React.FC<LoginProps> = ({ onLogin }) => {
   const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
 
+  // Handle form submission
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
     onLogin(username, password);
