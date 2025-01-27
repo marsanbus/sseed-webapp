@@ -16,10 +16,10 @@ const InstitutionRegistration: React.FC<LoginProps> = ({ onLogin }) => {
   return (
     <div className="login-container bg-cover bg-center min-h-screen flex items-center justify-center" style={{ backgroundImage: 'url(/path/to/your/background-image.jpg)' }}>
       <div className="bg-white p-8 rounded shadow-md w-full max-w-md">
-        <h2 className="text-2xl font-bold mb-6">Login</h2>
+        <h2 className="text-2xl font-bold mb-6">Registro de Institución</h2>
         <form onSubmit={handleSubmit}>
           <div className="mb-4">
-            <label htmlFor="username" className="block text-sm font-medium text-gray-700">Username:</label>
+            <label htmlFor="username" className="block text-sm font-medium text-gray-700">Código:</label>
             <input
               type="text"
               id="username"
@@ -29,7 +29,7 @@ const InstitutionRegistration: React.FC<LoginProps> = ({ onLogin }) => {
             />
           </div>
           <div className="mb-6">
-            <label htmlFor="password" className="block text-sm font-medium text-gray-700">Password:</label>
+            <label htmlFor="password" className="block text-sm font-medium text-gray-700">Contraseña:</label>
             <input
               type="password"
               id="password"

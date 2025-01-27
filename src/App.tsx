@@ -45,6 +45,11 @@ function App() {
     }
   };
 
+  const handleLogout = () => {
+    setIsAuthenticated(false);
+    setActiveTab('register');
+  }
+
   if (!isAuthenticated) {
     return <InstitutionRegistration onLogin={handleLogin} />;
   }
@@ -69,6 +74,7 @@ function App() {
             onEditUser={handleEditUser}
           />
         )}
+        {activeTab === 'close-session' && handleLogout()}
       </main>
     </div>
   );
