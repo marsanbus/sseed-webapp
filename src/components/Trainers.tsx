@@ -1,24 +1,28 @@
 import React, { useState } from 'react';
 import TrainerForm from './TrainerForm';
 
+// Define the structure of a Trainer
 interface Trainer {
     id: string;
     nombre: string;
     apellidos: string;
     correo: string;
     fechaNacimiento: string;
-    titulacion: string;
+    titulacion: string[];
 }
 
+// Trainers component
 const Trainers: React.FC = () => {
     const [trainers, setTrainers] = useState<Trainer[]>([]);
     const [showForm, setShowForm] = useState(false);
 
+    // Handle adding a new trainer
     const handleAddTrainer = (trainer: Trainer) => {
         setTrainers([...trainers, trainer]);
         setShowForm(false);
     };
 
+    // Handle closing the form
     const handleCloseForm = () => {
         setShowForm(false);
     };
@@ -51,7 +55,7 @@ const Trainers: React.FC = () => {
                     </div>
                     <div>
                         <p className="text-[#dabf94]">Titulación</p>
-                        <p className="text-[#3f3222]">{trainer.titulacion}</p>
+                        <p className="text-[#3f3222]">{trainer.titulacion.join(', ')}</p>
                     </div>
                     </div>
                 </div>
