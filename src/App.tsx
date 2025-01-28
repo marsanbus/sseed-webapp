@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { Users, MessageCircle, UserSquare2, CopyPlus, Power } from 'lucide-react';
 import Sidebar from './components/Sidebar';
+import Trainers from './components/Trainers';
 import UserRegistration from './components/UserRegistration';
 import RegisteredUsers from './components/RegisteredUsers';
 import InstitutionRegistration from './components/InstitutionRegistration';
@@ -56,6 +57,20 @@ function App() {
     setActiveTab('register');
   };
 
+  const renderContent = () => {
+    switch (activeTab) {
+      case 'trainers':
+        return <Trainers />;
+      case 'register':
+        return <UserRegistration onRegister={handleRegisterUser} initialData={editingUser} />;
+      case 'registered-users':
+        return <RegisteredUsers users={users} onEditUser={handleEditUser} />;
+      // Add cases for other tabs
+      default:
+        return <div>Select a tab</div>;
+    }
+  };
+
   // Effect to handle logout when the active tab is 'close-session'
   useEffect(() => {
     if (activeTab === 'close-session') {
@@ -77,18 +92,7 @@ function App() {
           <img src={logo} alt="SSEED Logo" className="h-8 w-8 mr-3" />
           <h1 className="text-3xl font-bold text-[#3f3222]">SSEED</h1>
         </div>
-        {activeTab === 'register' && (
-          <UserRegistration 
-            onRegister={handleRegisterUser}
-            initialData={editingUser}
-          />
-        )}
-        {activeTab === 'registered-users' && (
-          <RegisteredUsers 
-            users={users}
-            onEditUser={handleEditUser}
-          />
-        )}
+        {renderContent()}
       </main>
     </div>
   );
