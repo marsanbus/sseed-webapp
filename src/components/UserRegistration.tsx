@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { Upload } from 'lucide-react';
+// import { Upload } from 'lucide-react';
 import { diseases, treatments, sideEffects } from '../data/medical';
 import MedicalAuthorization from './MedicalAuthorization';
 import PhysicalProfileQuestions from './PhysicalProfileQuestions';
