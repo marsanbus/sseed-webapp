@@ -163,7 +163,7 @@ const TrainerForm: React.FC<TrainerFormProps> = ({ onAddTrainer, onClose }) => {
                     onChange={handleCheckboxChange}
                     className="form-checkbox"
                     />
-                    <span className="ml-2 text-black">Fisioterapeuta</span>
+                    <span className="ml-2 text-[#3f3222]">Fisioterapeuta</span>
                 </label>
                 <label className="inline-flex items-center">
                     <input
@@ -173,7 +173,7 @@ const TrainerForm: React.FC<TrainerFormProps> = ({ onAddTrainer, onClose }) => {
                     onChange={handleCheckboxChange}
                     className="form-checkbox"
                     />
-                    <span className="ml-2 text-black">CAFD (Ciencias de la Actividad Física del Deporte)</span>
+                    <span className="ml-2 text-[#3f3222]">CAFD (Ciencias de la Actividad Física del Deporte)</span>
                 </label>
                 <label className="inline-flex items-center">
                     <input
@@ -183,7 +183,7 @@ const TrainerForm: React.FC<TrainerFormProps> = ({ onAddTrainer, onClose }) => {
                     onChange={handleCheckboxChange}
                     className="form-checkbox"
                     />
-                    <span className="ml-2 text-black">TSEAS (Técnico Superior en Enseñanza y Animación Sociodeportiva)</span>
+                    <span className="ml-2 text-[#3f3222]">TSEAS (Técnico Superior en Enseñanza y Animación Sociodeportiva)</span>
                 </label>
                 <label className="inline-flex items-center">
                     <input
@@ -193,7 +193,7 @@ const TrainerForm: React.FC<TrainerFormProps> = ({ onAddTrainer, onClose }) => {
                     onChange={handleCheckboxChange}
                     className="form-checkbox"
                     />
-                    <span className="ml-2 text-black">Médico</span>
+                    <span className="ml-2 text-[#3f3222]">Médico</span>
                 </label>
                 <label className="inline-flex items-center">
                     <input
@@ -203,7 +203,7 @@ const TrainerForm: React.FC<TrainerFormProps> = ({ onAddTrainer, onClose }) => {
                     onChange={handleCheckboxChange}
                     className="form-checkbox"
                     />
-                    <span className="ml-2 text-black">TAF (Técnico Superior de Acondicionamiento Físico)</span>
+                    <span className="ml-2 text-[#3f3222]">TAF (Técnico Superior de Acondicionamiento Físico)</span>
                 </label>
                 <label className="inline-flex items-center">
                     <input
@@ -213,7 +213,7 @@ const TrainerForm: React.FC<TrainerFormProps> = ({ onAddTrainer, onClose }) => {
                     onChange={handleCheckboxChange}
                     className="form-checkbox"
                     />
-                    <span className="ml-2 text-black">Otros</span>
+                    <span className="ml-2 text-[#3f3222]">Otros</span>
                 </label>
                 </div>
             </div>
