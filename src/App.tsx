@@ -87,10 +87,12 @@ function App() {
   return (
     <div className="flex min-h-screen bg-[#f5f5f0]">
       <Sidebar menuItems={menuItems} activeTab={activeTab} setActiveTab={setActiveTab} />
-      <main className="flex-1 p-8">
-        <div className="mb-8 flex items-center">
-          <img src={logo} alt="SSEED Logo" className="h-8 w-8 mr-3" />
-          <h1 className="text-3xl font-bold text-[#3f3222]">SSEED</h1>
+      <main className="flex-1 ml-64 p-8">
+        <div className="mb-8 flex items-center justify-start">
+          <div className="flex items-center">
+            <img src={logo} alt="SSEED Logo" className="h-8 w-8 mr-3" />
+            <h1 className="text-3xl font-bold text-[#3f3222]">SSEED</h1>
+          </div>
         </div>
         {renderContent()}
       </main>

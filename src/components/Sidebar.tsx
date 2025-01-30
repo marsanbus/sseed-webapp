@@ -18,7 +18,7 @@ interface SidebarProps {
 // Sidebar component
 const Sidebar: React.FC<SidebarProps> = ({ menuItems, activeTab, setActiveTab }) => {
   return (
-    <aside className="w-64 bg-white shadow-lg">
+    <aside className="w-64 bg-white shadow-lg fixed h-full flex flex-col justify-center">
       <div className="p-6">
         <nav>
           {menuItems.map((item) => {
