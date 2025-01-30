@@ -67,7 +67,7 @@ function App() {
         return <RegisteredUsers users={users} onEditUser={handleEditUser} />;
       // Add cases for other tabs
       default:
-        return <div>Select a tab</div>;
+        return <div>Foro</div>;
     }
   };
 
