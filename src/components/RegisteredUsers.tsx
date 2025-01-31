@@ -1,13 +1,21 @@
 import React from 'react';
-import { Pencil } from 'lucide-react';
+import { Pencil, Trash } from 'lucide-react'; // Import Trash icon
 import { User } from '../types/user';
 
 interface RegisteredUsersProps {
   users: User[];
   onEditUser: (user: User) => void;
+  onDeleteUser: (userId: string) => void; // Add onDeleteUser prop
 }
 
-const RegisteredUsers: React.FC<RegisteredUsersProps> = ({ users, onEditUser }) => {
+const RegisteredUsers: React.FC<RegisteredUsersProps> = ({ users, onEditUser, onDeleteUser }) => {
+  // Handle delete confirmation
+  const handleDelete = (userId: string) => {
+    if (window.confirm('¿Estás seguro de que deseas eliminar este usuario?')) {
+      onDeleteUser(userId); // Call the onDeleteUser function
+    }
+  };
+
   return (
     <div className="max-w-4xl mx-auto">
       <h2 className="text-2xl font-bold text-[#3f3222] mb-6">Usuarios Registrados</h2>
@@ -19,10 +27,21 @@ const RegisteredUsers: React.FC<RegisteredUsersProps> = ({ users, onEditUser }) 
                 <h3 className="text-xl font-semibold text-[#3f3222]">{user.name}</h3>
                 <p className="text-[#a1a48f]">{user.email}</p>
               </div>
-              <button onClick={() => onEditUser(user)} className="text-[#5a6b47] hover:text-opacity-80 transition-colors">
-                <Pencil className="h-5 w-5" />
-              </button>
-            </div> 
+              <div className="flex space-x-2">
+                <button
+                  onClick={() => onEditUser(user)}
+                  className="text-[#5a6b47] hover:text-opacity-80 transition-colors"
+                >
+                  <Pencil className="h-5 w-5" />
+                </button>
+                <button
+                  onClick={() => handleDelete(user.id)}
+                  className="text-red-500 hover:text-red-700 transition-colors"
+                >
+                  <Trash className="h-5 w-5" />
+                </button>
+              </div>
+            </div>
             <div className="grid grid-cols-2 gap-4 text-sm">
               <div>
                 <p className="text-[#dabf94]">Fecha de nacimiento</p>

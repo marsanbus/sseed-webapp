@@ -24,20 +24,30 @@ function App() {
     { id: 'close-session', label: 'Cerrar Sesión', icon: Power },
   ];
 
-  // Handle user registration
+  // Handle user registration or update
   const handleRegisterUser = (userData: Omit<User, 'id'>) => {
-    const newUser = {
-      ...userData,
-      id: crypto.randomUUID(),
-    };
-    setUsers([...users, newUser]);
-    setActiveTab('registered-users');
+    if (editingUser) {
+      // Update existing user
+      const updatedUser = { ...userData, id: editingUser.id };
+      setUsers(users.map(user => user.id === editingUser.id ? updatedUser : user));
+      setEditingUser(null); // Clear the editing state
+    } else {
+      // Add new user
+      const newUser = { ...userData, id: crypto.randomUUID() };
+      setUsers([...users, newUser]);
+    }
+    setActiveTab('registered-users'); // Navigate to the registered users tab
   };
 
   // Handle user editing
   const handleEditUser = (user: User) => {
     setEditingUser(user);
-    setActiveTab('register');
+    setActiveTab('register'); // Navigate to the registration tab to edit the user
+  };
+
+  // Handle user deletion
+  const handleDeleteUser = (userId: string) => {
+    setUsers(users.filter(user => user.id !== userId)); // Remove the user
   };
 
   // Handle login
@@ -64,7 +74,7 @@ function App() {
       case 'register':
         return <UserRegistration onRegister={handleRegisterUser} initialData={editingUser} />;
       case 'registered-users':
-        return <RegisteredUsers users={users} onEditUser={handleEditUser} />;
+        return <RegisteredUsers users={users} onEditUser={handleEditUser} onDeleteUser={handleDeleteUser} />;
       // Add cases for other tabs
       default:
         return <div>Foro</div>;
