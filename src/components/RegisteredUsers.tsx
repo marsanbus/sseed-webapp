@@ -19,14 +19,10 @@ const RegisteredUsers: React.FC<RegisteredUsersProps> = ({ users, onEditUser }) 
                 <h3 className="text-xl font-semibold text-[#3f3222]">{user.name}</h3>
                 <p className="text-[#a1a48f]">{user.email}</p>
               </div>
-              <button
-                onClick={() => onEditUser(user)}
-                className="text-[#5a6b47] hover:text-opacity-80 transition-colors"
-              >
+              <button onClick={() => onEditUser(user)} className="text-[#5a6b47] hover:text-opacity-80 transition-colors">
                 <Pencil className="h-5 w-5" />
               </button>
-            </div>
-            
+            </div> 
             <div className="grid grid-cols-2 gap-4 text-sm">
               <div>
                 <p className="text-[#dabf94]">Fecha de nacimiento</p>
@@ -45,7 +41,6 @@ const RegisteredUsers: React.FC<RegisteredUsersProps> = ({ users, onEditUser }) 
                 <p className="text-[#3f3222]">{user.medicalAuthorization ? 'Sí' : 'No'}</p>
               </div>
             </div>
-
             {user.disease && (
               <div className="mt-4 pt-4 border-t">
                 <h4 className="font-semibold text-[#3f3222] mb-2">Patología</h4>

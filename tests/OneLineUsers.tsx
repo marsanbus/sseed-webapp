@@ -20,22 +20,9 @@ const RegisteredUsers: React.FC<RegisteredUsersProps> = ({ users, onEditUser }) 
                 <p className="text-[#a1a48f]">{user.disease?.general}</p>
                 </div>
                 <div className="flex items-center space-x-4">
-                <button
-                    className="bg-[#5a6b47] text-white px-4 py-2 rounded-lg hover:bg-opacity-80 transition-colors"
-                >
-                    Evaluar
-                </button>
-                <button
-                    className="bg-[#5a6b47] text-white px-4 py-2 rounded-lg hover:bg-opacity-80 transition-colors"
-                >
-                    Planificar Entrenamiento
-                </button>
-                <button
-                    onClick={() => onEditUser(user)}
-                    className="text-[#5a6b47] hover:text-opacity-80 transition-colors"
-                >
-                    <Pencil className="h-5 w-5" />
-                </button>
+                <button className="bg-[#5a6b47] text-white px-4 py-2 rounded-lg hover:bg-opacity-80 transition-colors">Evaluar</button>
+                <button className="bg-[#5a6b47] text-white px-4 py-2 rounded-lg hover:bg-opacity-80 transition-colors">Planificar Entrenamiento</button>
+                <button onClick={() => onEditUser(user)}className="text-[#5a6b47] hover:text-opacity-80 transition-colors"><Pencil className="h-5 w-5" /></button>
                 </div>
             </div>
             ))}

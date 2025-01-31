@@ -31,12 +31,7 @@ const Trainers: React.FC = () => {
     <div className="flex-1 p-8">
       <div className="flex justify-between items-center mb-6">
         <h2 className="text-2xl font-bold text-[#3f3222]">Entrenadores</h2>
-        <button
-          onClick={() => setShowForm(!showForm)}
-          className="bg-[#5a6b47] text-white px-4 py-2 rounded-lg hover:bg-opacity-80 transition-colors"
-        >
-          Añadir
-        </button>
+        <button onClick={() => setShowForm(!showForm)} className="bg-[#5a6b47] text-white px-4 py-2 rounded-lg hover:bg-opacity-80 transition-colors">Añadir</button>
       </div>
       {showForm && <TrainerForm onAddTrainer={handleAddTrainer} onClose={handleCloseForm} />}
       <div className="space-y-4">

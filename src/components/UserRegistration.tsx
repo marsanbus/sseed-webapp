@@ -93,48 +93,23 @@ const UserRegistration: React.FC<UserRegistrationProps> = ({ onRegister, initial
         <div className="grid grid-cols-2 gap-6">
           <div>
             <label className="block text-[#dabf94] mb-2">Nombre y Apellidos</label>
-            <input
-              type="text"
-              value={formData.name}
-              onChange={(e) => handleInputChange('name', e.target.value)}
-              className="w-full p-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-[#5a6b47]"
-            />
+            <input type="text" value={formData.name} onChange={(e) => handleInputChange('name', e.target.value)} className="w-full p-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-[#5a6b47]"/>
           </div>
           <div>
             <label className="block text-[#dabf94] mb-2">Fecha de nacimiento</label>
-            <input
-              type="date"
-              value={formData.birthDate}
-              onChange={(e) => handleInputChange('birthDate', e.target.value)}
-              className="w-full p-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-[#5a6b47]"
-            />
+            <input type="date" value={formData.birthDate} onChange={(e) => handleInputChange('birthDate', e.target.value)} className="w-full p-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-[#5a6b47]"/>
           </div>
           <div>
             <label className="block text-[#dabf94] mb-2">Peso aprox (kg)</label>
-            <input
-              type="number"
-              value={formData.weight}
-              onChange={(e) => handleInputChange('weight', e.target.value)}
-              className="w-full p-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-[#5a6b47]"
-            />
+            <input type="number" value={formData.weight} onChange={(e) => handleInputChange('weight', e.target.value)} className="w-full p-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-[#5a6b47]"/>
           </div>
           <div>
             <label className="block text-[#dabf94] mb-2">Talla aprox (cm)</label>
-            <input
-              type="number"
-              value={formData.height}
-              onChange={(e) => handleInputChange('height', e.target.value)}
-              className="w-full p-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-[#5a6b47]"
-            />
+            <input type="number" value={formData.height} onChange={(e) => handleInputChange('height', e.target.value)} className="w-full p-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-[#5a6b47]"/>
           </div>
           <div>
             <label className="block text-[#dabf94] mb-2">Email</label>
-            <input
-              type="email"
-              value={formData.email}
-              onChange={(e) => handleInputChange('email', e.target.value)}
-              className="w-full p-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-[#5a6b47]"
-            />
+            <input type="email" value={formData.email} onChange={(e) => handleInputChange('email', e.target.value)} className="w-full p-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-[#5a6b47]"/>
           </div>
         </div>
       </div>
@@ -149,11 +124,7 @@ const UserRegistration: React.FC<UserRegistrationProps> = ({ onRegister, initial
         <div className="grid grid-cols-1 gap-6">
           <div>
             <label className="block text-[#dabf94] mb-2">Patología General</label>
-            <select
-              value={formData.selectedDisease}
-              onChange={(e) => handleInputChange('selectedDisease', e.target.value)}
-              className="w-full p-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-[#5a6b47]"
-            >
+            <select value={formData.selectedDisease} onChange={(e) => handleInputChange('selectedDisease', e.target.value)} className="w-full p-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-[#5a6b47]">
               <option value="">Selecciona una patología</option>
               {Object.keys(diseases).map((disease) => (
                 <option key={disease} value={disease}>
@@ -166,11 +137,7 @@ const UserRegistration: React.FC<UserRegistrationProps> = ({ onRegister, initial
           {formData.selectedDisease && (
             <div>
               <label className="block text-[#dabf94] mb-2">Patología Específica</label>
-              <select
-                value={formData.selectedSpecificDisease}
-                onChange={(e) => handleInputChange('selectedSpecificDisease', e.target.value)}
-                className="w-full p-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-[#5a6b47]"
-              >
+              <select value={formData.selectedSpecificDisease} onChange={(e) => handleInputChange('selectedSpecificDisease', e.target.value)} className="w-full p-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-[#5a6b47]">
                 <option value="">Selecciona una patología específica</option>
                 {diseases[formData.selectedDisease].map((disease) => (
                   <option key={disease} value={disease}>
@@ -185,12 +152,7 @@ const UserRegistration: React.FC<UserRegistrationProps> = ({ onRegister, initial
             <>
               <div>
                 <label className="block text-[#dabf94] mb-2">Fecha de Diagnóstico</label>
-                <input
-                  type="date"
-                  value={formData.diagnosisDate}
-                  onChange={(e) => handleInputChange('diagnosisDate', e.target.value)}
-                  className="w-full p-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-[#5a6b47]"
-                />
+                <input type="date" value={formData.diagnosisDate} onChange={(e) => handleInputChange('diagnosisDate', e.target.value)} className="w-full p-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-[#5a6b47]"/>
               </div>
 
               <div className="border-t pt-6">
@@ -202,23 +164,11 @@ const UserRegistration: React.FC<UserRegistrationProps> = ({ onRegister, initial
                     </label>
                     <div className="space-x-4">
                       <label className="inline-flex items-center">
-                        <input
-                          type="radio"
-                          name="treatment"
-                          checked={formData.hasTreatment}
-                          onChange={() => handleInputChange('hasTreatment', true)}
-                          className="form-radio"
-                        />
+                        <input type="radio" name="treatment" checked={formData.hasTreatment} onChange={() => handleInputChange('hasTreatment', true)} className="form-radio"/>
                         <span className="ml-2 text-[#a1a48f]">Sí</span>
                       </label>
                       <label className="inline-flex items-center">
-                        <input
-                          type="radio"
-                          name="treatment"
-                          checked={!formData.hasTreatment}
-                          onChange={() => handleInputChange('hasTreatment', false)}
-                          className="form-radio"
-                        />
+                        <input type="radio" name="treatment" checked={!formData.hasTreatment} onChange={() => handleInputChange('hasTreatment', false)} className="form-radio"/>
                         <span className="ml-2 text-[#a1a48f]">No</span>
                       </label>
                     </div>
@@ -230,12 +180,7 @@ const UserRegistration: React.FC<UserRegistrationProps> = ({ onRegister, initial
                         <label className="block text-[#dabf94] mb-2">
                           ¿Cuándo comenzaste con el tratamiento?
                         </label>
-                        <input
-                          type="month"
-                          value={formData.treatmentStartDate}
-                          onChange={(e) => handleInputChange('treatmentStartDate', e.target.value)}
-                          className="w-full p-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-[#5a6b47]"
-                        />
+                        <input type="month" value={formData.treatmentStartDate} onChange={(e) => handleInputChange('treatmentStartDate', e.target.value)} className="w-full p-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-[#5a6b47]"/>
                       </div>
 
                       <div>
@@ -243,9 +188,7 @@ const UserRegistration: React.FC<UserRegistrationProps> = ({ onRegister, initial
                         <div className="space-y-2">
                           {treatments[formData.selectedSpecificDisease]?.map((treatment) => (
                             <label key={treatment} className="flex items-center">
-                              <input
-                                type="checkbox"
-                                checked={formData.selectedTreatments.includes(treatment)}
+                              <input type="checkbox" checked={formData.selectedTreatments.includes(treatment)}
                                 onChange={(e) => {
                                   const newTreatments = e.target.checked
                                     ? [...formData.selectedTreatments, treatment]
@@ -273,9 +216,7 @@ const UserRegistration: React.FC<UserRegistrationProps> = ({ onRegister, initial
                   <div className="space-y-2">
                     {sideEffects[formData.selectedSpecificDisease]?.map((effect) => (
                       <label key={effect} className="flex items-center">
-                        <input
-                          type="checkbox"
-                          checked={formData.selectedSideEffects.includes(effect)}
+                        <input type="checkbox" checked={formData.selectedSideEffects.includes(effect)}
                           onChange={(e) => {
                             const newEffects = e.target.checked
                               ? [...formData.selectedSideEffects, effect]

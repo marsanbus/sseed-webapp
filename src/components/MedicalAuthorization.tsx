@@ -24,23 +24,11 @@ const MedicalAuthorization = () => {
         <label className="block text-[#dabf94] mb-2">¿Tienes autorización médica?</label>
         <div className="space-x-4">
           <label className="inline-flex items-center">
-            <input
-              type="radio"
-              name="hasAuthorization"
-              className="form-radio"
-              onChange={() => setHasAuthorization(true)}
-              checked={hasAuthorization === true}
-            />
+            <input type="radio" name="hasAuthorization" className="form-radio" onChange={() => setHasAuthorization(true)} checked={hasAuthorization === true}/>
             <span className="ml-2 text-[#a1a48f]">Sí</span>
           </label>
           <label className="inline-flex items-center">
-            <input
-              type="radio"
-              name="hasAuthorization"
-              className="form-radio"
-              onChange={() => setHasAuthorization(false)}
-              checked={hasAuthorization === false}
-            />
+            <input type="radio" name="hasAuthorization" className="form-radio" onChange={() => setHasAuthorization(false)} checked={hasAuthorization === false}/>
             <span className="ml-2 text-[#a1a48f]">No</span>
           </label>
         </div>
@@ -59,30 +47,17 @@ const MedicalAuthorization = () => {
           <p className="text-[#a1a48f] italic bg-white p-4 rounded-lg shadow-sm">
             Con las respuestas que usted proporcione, el resultado del cuestionario le indicará si puede comenzar con el programa, de una forma razonablemente segura, o si debería consultar con su médico antes de iniciarse. El sentido común es la mejor guía para contestar a estas preguntas. Por favor, léalas cuidadosamente y conteste a cada una con honestidad: Indique SI o NO
           </p>
-
           <div className="space-y-4">
             {PAR_Q_QUESTIONS.map((question, index) => (
               <div key={index} className="bg-white p-4 rounded-lg shadow-sm">
                 <p className="text-[#3f3222] mb-2">{question}</p>
                 <div className="space-x-4">
                   <label className="inline-flex items-center">
-                    <input
-                      type="radio"
-                      name={`question-${index}`}
-                      className="form-radio"
-                      onChange={() => handleAnswerChange(index, true)}
-                      checked={answers[index] === true}
-                    />
+                    <input type="radio" name={`question-${index}`} className="form-radio" onChange={() => handleAnswerChange(index, true)} checked={answers[index] === true}/>
                     <span className="ml-2 text-[#a1a48f]">Sí</span>
                   </label>
                   <label className="inline-flex items-center">
-                    <input
-                      type="radio"
-                      name={`question-${index}`}
-                      className="form-radio"
-                      onChange={() => handleAnswerChange(index, false)}
-                      checked={answers[index] === false}
-                    />
+                    <input type="radio" name={`question-${index}`} className="form-radio" onChange={() => handleAnswerChange(index, false)} checked={answers[index] === false}/>
                     <span className="ml-2 text-[#a1a48f]">No</span>
                   </label>
                 </div>
@@ -95,15 +70,8 @@ const MedicalAuthorization = () => {
       <Modal isOpen={showModal} onClose={() => setShowModal(false)}>
         <div className="p-6">
           <h3 className="text-xl font-bold text-[#3f3222] mb-4">Autorización Médica Requerida</h3>
-          <p className="text-[#a1a48f] mb-4">
-            Para poder proseguir con la planificación de ejercicio físico, necesitas una autorización médica. Si ya dispones de ella adjuntala en el apartado correspondiente, en caso contrario ponte en contacto con tu médico de cabecera.
-          </p>
-          <button
-            onClick={() => setShowModal(false)}
-            className="bg-[#5a6b47] text-white px-4 py-2 rounded-lg hover:bg-opacity-90 transition-colors"
-          >
-            Entendido
-          </button>
+          <p className="text-[#a1a48f] mb-4">Para poder proseguir con la planificación de ejercicio físico, necesitas una autorización médica. Si ya dispones de ella adjuntala en el apartado correspondiente, en caso contrario ponte en contacto con tu médico de cabecera.</p>
+          <button onClick={() => setShowModal(false)} className="bg-[#5a6b47] text-white px-4 py-2 rounded-lg hover:bg-opacity-90 transition-colors">Entendido</button>
         </div>
       </Modal>
     </div>

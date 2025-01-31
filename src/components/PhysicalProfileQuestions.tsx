@@ -21,23 +21,11 @@ const PhysicalProfileQuestions: React.FC<PhysicalProfileQuestionsProps> = ({
             <p className="text-[#3f3222] mb-2">{question}</p>
             <div className="space-x-4">
               <label className="inline-flex items-center">
-                <input
-                  type="radio"
-                  name={`physical-question-${index}`}
-                  className="form-radio"
-                  onChange={() => onAnswerChange(index, true)}
-                  checked={answers[index] === true}
-                />
+                <input type="radio" name={`physical-question-${index}`} className="form-radio" onChange={() => onAnswerChange(index, true)} checked={answers[index] === true}/>
                 <span className="ml-2 text-[#a1a48f]">Sí</span>
               </label>
               <label className="inline-flex items-center">
-                <input
-                  type="radio"
-                  name={`physical-question-${index}`}
-                  className="form-radio"
-                  onChange={() => onAnswerChange(index, false)}
-                  checked={answers[index] === false}
-                />
+                <input type="radio" name={`physical-question-${index}`} className="form-radio" onChange={() => onAnswerChange(index, false)} checked={answers[index] === false}/>
                 <span className="ml-2 text-[#a1a48f]">No</span>
               </label>
             </div>
@@ -57,12 +45,7 @@ const PhysicalProfileQuestions: React.FC<PhysicalProfileQuestionsProps> = ({
       </div>
 
       <div className="mt-8 flex justify-end">
-        <button
-          onClick={onSubmit}
-          className="bg-[#5a6b47] text-white px-6 py-3 rounded-lg hover:bg-opacity-90 transition-colors font-semibold"
-        >
-          Registrar Usuario
-        </button>
+        <button onClick={onSubmit} className="bg-[#5a6b47] text-white px-6 py-3 rounded-lg hover:bg-opacity-90 transition-colors font-semibold">Registrar Usuario</button>
       </div>
     </div>
   );
