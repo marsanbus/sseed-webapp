@@ -83,6 +83,17 @@ export const sideEffects: SideEffectMap = {
     'Hipotensión ortostática',
     'Alta frecuencia urinaria',
   ],
+  'Prehipertensión': [
+    'Si ves esto, está bien',
+  ],
+  'Asma': [
+    'Tos',
+    'Disnea',
+    'Sibilancias',
+    'Opresión torácica',
+    'Dolor torácico',
+    'Fatiga',
+  ]
 };
 
 export const PAR_Q_QUESTIONS = [
