@@ -71,7 +71,7 @@ export const treatments: TreatmentMap = {
     'Antagonistas del calcio',
     'Bloqueadores alfa',
     'Antagonistas de los receptores de la angiotensina II (ARA II)',
-  ],
+  ], 
 };
 
 export const sideEffects: SideEffectMap = {
@@ -83,17 +83,11 @@ export const sideEffects: SideEffectMap = {
     'Hipotensión ortostática',
     'Alta frecuencia urinaria',
   ],
-  'Prehipertensión': [
-    'Si ves esto, está bien',
+  'Diabetes mellitus tipo 2': [
+    'Retinopatía diabética',
+    'Neuropatía periférica',
+    'Neuropatía autónoma',
   ],
-  'Asma': [
-    'Tos',
-    'Disnea',
-    'Sibilancias',
-    'Opresión torácica',
-    'Dolor torácico',
-    'Fatiga',
-  ]
 };
 
 export const PAR_Q_QUESTIONS = [
