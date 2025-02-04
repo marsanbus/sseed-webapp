@@ -34,9 +34,9 @@ const PhysicalProfileQuestions: React.FC<PhysicalProfileQuestionsProps> = ({
       </div>
 
       <div className='mb-8'>
-        <h2 className='text-2xl font-bold text-[#3f3222] mb-6'>Asignar Entrenador</h2>
+        <h2 className='text-2xl font-bold text-[#3f3222] mb-6'>Asignar Profesional</h2>
         <select className='w-full p-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-[#5a6b47]'>
-          <option value="">Selecciona un entrenador</option>
+          <option value="">Selecciona un Profesional</option>
           <option value="Marcos">Marcos</option>
           <option value="Paula">Paula</option>
           <option value="Sergio">Sergio</option>

@@ -40,7 +40,7 @@ const Trainers: React.FC = () => {
     };
 
     const handleDeleteTrainer = (trainerId: string) => {
-        if (window.confirm('¿Estás seguro de que deseas eliminar este entrenador?')) {
+        if (window.confirm('¿Estás seguro de que deseas eliminar este profesional?')) {
         setTrainers(trainers.filter(trainer => trainer.id !== trainerId));
         }
     };
@@ -48,12 +48,12 @@ const Trainers: React.FC = () => {
     return (
         <div className="flex-1 p-8">
         <div className="flex justify-between items-center mb-6">
-            <h2 className="text-2xl font-bold text-[#3f3222]">Entrenadores</h2>
+            <h2 className="text-2xl font-bold text-[#3f3222]">Profesionales</h2>
             <button
             onClick={() => setShowForm(!showForm)}
             className="bg-[#5a6b47] text-white px-4 py-2 rounded-lg hover:bg-opacity-80 transition-colors"
             >
-            {editingTrainer ? 'Editar Entrenador' : 'Añadir Entrenador'}
+            {editingTrainer ? 'Editar Profesional' : 'Añadir Profesional'}
             </button>
         </div>
         {showForm && <TrainerForm onAddTrainer={handleAddTrainer} onClose={handleCloseForm} initialData={editingTrainer} />}
@@ -64,7 +64,7 @@ const Trainers: React.FC = () => {
                 className="bg-white rounded-lg shadow-lg p-4 flex justify-between items-center"
             >
                 <div className="flex items-center gap-4 text-[#3f3222]">
-                <img src={trainer.foto || male} alt="Foto del entrenador" className="w-10 h-10 rounded-full" />
+                <img src={trainer.foto || male} alt="Foto del profesional" className="w-10 h-10 rounded-full" />
                 <span className="font-semibold">{trainer.nombre} {trainer.apellidos}</span>
                 <span className="text-[#a1a48f]">📚 {trainer.titulacion.join(', ')}</span>
                 <span className="text-[#a1a48f]">✉️ {trainer.correo}</span>

@@ -17,7 +17,7 @@ function App() {
 
   // Menu items for the sidebar
   const menuItems = [
-    { id: 'trainers', label: 'Entrenadores', icon: Users },
+    { id: 'trainers', label: 'Profesionales', icon: Users },
     { id: 'register', label: 'Registro de Usuario', icon: CopyPlus },
     { id: 'registered-users', label: 'Usuarios Registrados', icon: UserSquare2 },
     { id: 'forum', label: 'Foro', icon: MessageCircle },
