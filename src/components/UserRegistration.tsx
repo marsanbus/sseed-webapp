@@ -17,12 +17,15 @@ const UserRegistration: React.FC<UserRegistrationProps> = ({ onRegister, initial
     birthDate: '',
     weight: '',
     height: '',
+    email: '',
     disease: '',
     treatment: '',
     specificAnswers: {},
   });
 
   const [selectedDisease, setSelectedDisease] = useState<string | null>(null);
+
+  const [physicalProfileAnswers, setPhysicalProfileAnswers] = useState<Record<number, boolean>>({});
 
   const handleInputChange = (e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement>) => {
     const { name, value } = e.target;
@@ -167,47 +170,40 @@ const UserRegistration: React.FC<UserRegistrationProps> = ({ onRegister, initial
 
   return (
     <form onSubmit={handleSubmit} className="bg-white rounded-lg shadow-lg p-6 mb-6">
-      <div className="mb-4">
-        <label className="block text-[#dabf94] mb-2">Nombre</label>
-        <input
-          type="text"
-          name="name"
-          value={formData.name}
-          onChange={handleInputChange}
-          className="w-full p-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-[#5a6b47]"
-        />
+      <div className="mb-8">
+        
+        <h2 className="text-2xl font-bold text-[#3f3222] mb-6">Datos Generales</h2>
+        <div className="grid grid-cols-2 gap-6">
+          <div>
+            <label className="block text-[#dabf94] mb-2">Nombre y Apellidos</label>
+            <input type="text" value={formData.name} onChange={(e) => handleInputChange('name', e.target.value)} className="w-full p-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-[#5a6b47]"/>
+          </div>
+          <div>
+            <label className="block text-[#dabf94] mb-2">Fecha de nacimiento</label>
+            <input type="date" value={formData.birthDate} onChange={(e) => handleInputChange('birthDate', e.target.value)} className="w-full p-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-[#5a6b47]"/>
+          </div>
+          <div>
+            <label className="block text-[#dabf94] mb-2">Peso aprox (kg)</label>
+            <input type="number" value={formData.weight} onChange={(e) => handleInputChange('weight', e.target.value)} className="w-full p-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-[#5a6b47]"/>
+          </div>
+          <div>
+            <label className="block text-[#dabf94] mb-2">Talla aprox (cm)</label>
+            <input type="number" value={formData.height} onChange={(e) => handleInputChange('height', e.target.value)} className="w-full p-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-[#5a6b47]"/>
+          </div>
+          <div>
+            <label className="block text-[#dabf94] mb-2">Email</label>
+            <input type="email" value={formData.email} onChange={(e) => handleInputChange('email', e.target.value)} className="w-full p-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-[#5a6b47]"/>
+          </div>
+        </div>
       </div>
-      <div className="mb-4">
-        <label className="block text-[#dabf94] mb-2">Fecha de Nacimiento</label>
-        <input
-          type="date"
-          name="birthDate"
-          value={formData.birthDate}
-          onChange={handleInputChange}
-          className="w-full p-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-[#5a6b47]"
-        />
+
+      <div className="mb-8">
+        <h2 className="text-2xl font-bold text-[#3f3222] mb-6">Autorización médica</h2>
+        <MedicalAuthorization />
       </div>
+
       <div className="mb-4">
-        <label className="block text-[#dabf94] mb-2">Peso</label>
-        <input
-          type="number"
-          name="weight"
-          value={formData.weight}
-          onChange={handleInputChange}
-          className="w-full p-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-[#5a6b47]"
-        />
-      </div>
-      <div className="mb-4">
-        <label className="block text-[#dabf94] mb-2">Altura</label>
-        <input
-          type="number"
-          name="height"
-          value={formData.height}
-          onChange={handleInputChange}
-          className="w-full p-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-[#5a6b47]"
-        />
-      </div>
-      <div className="mb-4">
+      <h2 className="text-2xl font-bold text-[#3f3222] mb-6">Patologías</h2>
         <label className="block text-[#dabf94] mb-2">Patología Específica</label>
         <select
           name="disease"
@@ -321,9 +317,15 @@ const UserRegistration: React.FC<UserRegistrationProps> = ({ onRegister, initial
         </div>
       )}
 
-      <button type="submit" className="bg-[#5a6b47] text-white px-4 py-2 rounded-lg hover:bg-opacity-80 transition-colors">
-        Registrar
-      </button>
+      <div className="border-t pt-6">
+        <PhysicalProfileQuestions
+          answers={physicalProfileAnswers}
+          onAnswerChange={(index, value) => {
+            setPhysicalProfileAnswers(prev => ({ ...prev, [index]: value }));
+          }}
+          onSubmit={handleSubmit}
+        />
+      </div>
     </form>
   );
 };
