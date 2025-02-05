@@ -1,7 +1,8 @@
 import { useState, useEffect } from 'react';
 import { diseases, treatments } from '../data/medical';
-import { cancerDeMamaQuestions } from '../data/diseaseQuestions/cancerDeMama'; // Import specific questions
+import { hipertensionOPrehipertensionQuestions } from '../data/diseaseQuestions/hipertensionOPrehipertension';
 import { diabetesMellitusTipo2Questions } from '../data/diseaseQuestions/diabetesMellitusTipo2'; // Import specific questions
+import { cancerDeMamaQuestions } from '../data/diseaseQuestions/cancerDeMama'; // Import specific questions
 import MedicalAuthorization from './MedicalAuthorization';
 import PhysicalProfileQuestions from './PhysicalProfileQuestions';
 import { User } from '../types/user';
@@ -96,10 +97,12 @@ const UserRegistration: React.FC<UserRegistrationProps> = ({ onRegister, onClose
 
   const getSpecificQuestions = () => {
     switch (selectedDisease) {
-      case 'Cáncer de mama':
-        return cancerDeMamaQuestions;
+      case 'Hipertensión o prehipertensión':
+        return hipertensionOPrehipertensionQuestions;
       case 'Diabetes mellitus tipo 2':
         return diabetesMellitusTipo2Questions;
+      case 'Cáncer de mama':
+        return cancerDeMamaQuestions;
       // Add cases for other diseases
       default:
         return [];
