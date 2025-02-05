@@ -7,7 +7,7 @@ export const cancerDeMamaQuestions = [
             {
                 question: '¿Hace cuanto tiempo fué la cirujía?',
                 type: 'selection',
-                options: ['Hace menos de 1 mes', 'Entre 1 mes y 3 meses', '3-6 meses', '+ 6 meses']
+                options: ['Hace menos de 1 mes', 'Entre 1 mes y 3 meses', 'De 3 a 6 meses', 'Más de 6 meses']
             },
             { 
                 question: '¿Qué tipo de cirujía?', 

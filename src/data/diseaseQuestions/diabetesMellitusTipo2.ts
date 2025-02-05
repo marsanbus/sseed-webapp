@@ -7,7 +7,7 @@ export const diabetesMellitusTipo2Questions = [
                 {
                     question: 'Selecciona uno de los siguientes:',
                     type: 'multiple',
-                    options: ['gliburida', 'glipizida', 'glimepirida', 'nateglinida', 'repaglinida']
+                    options: ['Gliburida', 'Glipizida', 'Glimepirida', 'Nateglinida', 'Repaglinida']
                 }
             ],
             no: [],
