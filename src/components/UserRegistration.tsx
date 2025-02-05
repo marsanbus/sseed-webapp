@@ -22,7 +22,7 @@ const UserRegistration: React.FC<UserRegistrationProps> = ({ onRegister, onClose
     disease: '',
     treatment: '',
     specificAnswers: {},
-    assignedProfessional: '', // Add assignedProfessional to the state
+    assignedProfessional: '',
   });
 
   useEffect(() => {
@@ -88,7 +88,7 @@ const UserRegistration: React.FC<UserRegistrationProps> = ({ onRegister, onClose
       disease: '',
       treatment: '',
       specificAnswers: {},
-      assignedProfessional: '', // Reset assignedProfessional
+      assignedProfessional: '',
     });
     setPhysicalProfileAnswers({});
     setSelectedDisease(null);
@@ -111,30 +111,30 @@ const UserRegistration: React.FC<UserRegistrationProps> = ({ onRegister, onClose
       <div key={`${parentIndex}_${followUpIndex}`} className="mb-4 ml-4 mt-2">
         <label className="block text-[#dabf94] mb-2">{followUpQuestion.question}</label>
         {followUpQuestion.type === 'boolean' ? (
-          <div className="flex items-center mb-2">
-            <input
-              type="radio"
-              id={`followUpAnswer_${parentIndex}_${followUpIndex}_yes`}
-              name={`followUpAnswer_${parentIndex}_${followUpIndex}`}
-              value="yes"
-              checked={formData.specificAnswers[followUpQuestion.question] === 'yes'}
-              onChange={(e) => handleSpecificAnswerChange(followUpQuestion.question, e.target.value)}
-              className="mr-2"
-            />
-            <label htmlFor={`followUpAnswer_${parentIndex}_${followUpIndex}_yes`} className="text-[#3f3222]">
-              Sí
+          <div className="flex items-center mb-2 space-x-4">
+            <label className="inline-flex items-center">
+              <input
+                type="radio"
+                id={`followUpAnswer_${parentIndex}_${followUpIndex}_yes`}
+                name={`followUpAnswer_${parentIndex}_${followUpIndex}`}
+                value="yes"
+                checked={formData.specificAnswers[followUpQuestion.question] === 'yes'}
+                onChange={(e) => handleSpecificAnswerChange(followUpQuestion.question, e.target.value)}
+                className="form-radio"
+              />
+              <span className="ml-2 text-[#a1a48f]">Sí</span>
             </label>
-            <input
-              type="radio"
-              id={`followUpAnswer_${parentIndex}_${followUpIndex}_no`}
-              name={`followUpAnswer_${parentIndex}_${followUpIndex}`}
-              value="no"
-              checked={formData.specificAnswers[followUpQuestion.question] === 'no'}
-              onChange={(e) => handleSpecificAnswerChange(followUpQuestion.question, e.target.value)}
-              className="mr-2"
-            />
-            <label htmlFor={`followUpAnswer_${parentIndex}_${followUpIndex}_no`} className="text-[#3f3222]">
-              No
+            <label className="inline-flex items-center">
+              <input
+                type="radio"
+                id={`followUpAnswer_${parentIndex}_${followUpIndex}_no`}
+                name={`followUpAnswer_${parentIndex}_${followUpIndex}`}
+                value="no"
+                checked={formData.specificAnswers[followUpQuestion.question] === 'no'}
+                onChange={(e) => handleSpecificAnswerChange(followUpQuestion.question, e.target.value)}
+                className="form-radio"
+              />
+              <span className="ml-2 text-[#a1a48f]">No</span>
             </label>
           </div>
         ) : followUpQuestion.type === 'selection' ? (
@@ -265,30 +265,30 @@ const UserRegistration: React.FC<UserRegistrationProps> = ({ onRegister, onClose
             <div key={index} className="mb-4">
               <label className="block text-[#dabf94] mb-2">{questionObj.question}</label>
               {questionObj.type === 'boolean' ? (
-                <div className="flex items-center mb-2">
-                  <input
-                    type="radio"
-                    id={`specificAnswer_${index}_yes`}
-                    name={`specificAnswer_${index}`}
-                    value="yes"
-                    checked={formData.specificAnswers[questionObj.question] === 'yes'}
-                    onChange={(e) => handleSpecificAnswerChange(questionObj.question, e.target.value)}
-                    className="mr-2"
-                  />
-                  <label htmlFor={`specificAnswer_${index}_yes`} className="text-[#3f3222]">
-                    Sí
+                <div className="flex items-center mb-2 space-x-4">
+                  <label className="inline-flex items-center">
+                    <input
+                      type="radio"
+                      id={`specificAnswer_${index}_yes`}
+                      name={`specificAnswer_${index}`}
+                      value="yes"
+                      checked={formData.specificAnswers[questionObj.question] === 'yes'}
+                      onChange={(e) => handleSpecificAnswerChange(questionObj.question, e.target.value)}
+                      className="form-radio"
+                    />
+                    <span className="ml-2 text-[#a1a48f]">Sí</span>
                   </label>
-                  <input
-                    type="radio"
-                    id={`specificAnswer_${index}_no`}
-                    name={`specificAnswer_${index}`}
-                    value="no"
-                    checked={formData.specificAnswers[questionObj.question] === 'no'}
-                    onChange={(e) => handleSpecificAnswerChange(questionObj.question, e.target.value)}
-                    className="mr-2"
-                  />
-                  <label htmlFor={`specificAnswer_${index}_no`} className="text-[#3f3222]">
-                    No
+                  <label className="inline-flex items-center">
+                    <input
+                      type="radio"
+                      id={`specificAnswer_${index}_no`}
+                      name={`specificAnswer_${index}`}
+                      value="no"
+                      checked={formData.specificAnswers[questionObj.question] === 'no'}
+                      onChange={(e) => handleSpecificAnswerChange(questionObj.question, e.target.value)}
+                      className="form-radio"
+                    />
+                    <span className="ml-2 text-[#a1a48f]">No</span>
                   </label>
                 </div>
               ) : questionObj.type === 'multiple' ? (
@@ -331,7 +331,7 @@ const UserRegistration: React.FC<UserRegistrationProps> = ({ onRegister, onClose
           ))}
         </div>
       )}
-      <div className="mb-8">
+      <div className="border-t pt-6">
         <h2 className="text-2xl font-bold text-[#3f3222] mb-6">Asignar Profesional</h2>
         <select
           name="assignedProfessional"
