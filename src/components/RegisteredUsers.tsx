@@ -1,8 +1,9 @@
 import React, { useState } from 'react';
-import { useNavigate } from 'react-router-dom'; // Import useNavigate for navigation
 import { Pencil, Trash } from 'lucide-react';
 import male from '../assets/male.png';
 import { User } from '../types/user';
+import Evaluacion from './Evaluacion'; // Import the Evaluacion component
+import Entrenamiento from './Entrenamiento'; // Import the Entrenamiento component
 
 interface RegisteredUsersProps {
   users: User[];
@@ -11,12 +12,12 @@ interface RegisteredUsersProps {
 }
 
 const RegisteredUsers: React.FC<RegisteredUsersProps> = ({ users, onEditUser, onDeleteUser }) => {
-  const navigate = useNavigate(); // Initialize useNavigate for navigation
-  const [editingUser, setEditingUser] = useState<User | null>(null);
+  const [activeScreen, setActiveScreen] = useState<string | null>(null);
+  const [selectedUser, setSelectedUser] = useState<User | null>(null);
 
   const handleEditUser = (user: User) => {
-    onEditUser(user); // Pass the user to be edited
-    navigate('/registro-usuario'); // Navigate to the user registration page
+    onEditUser(user);
+    setActiveScreen('register');
   };
 
   const handleDelete = (userId: string) => {
@@ -24,6 +25,24 @@ const RegisteredUsers: React.FC<RegisteredUsersProps> = ({ users, onEditUser, on
       onDeleteUser(userId);
     }
   };
+
+  const handleEvaluate = (user: User) => {
+    setSelectedUser(user);
+    setActiveScreen('evaluacion');
+  };
+
+  const handleTrain = (user: User) => {
+    setSelectedUser(user);
+    setActiveScreen('entrenamiento');
+  };
+
+  if (activeScreen === 'evaluacion' && selectedUser) {
+    return <Evaluacion />;
+  }
+
+  if (activeScreen === 'entrenamiento' && selectedUser) {
+    return <Entrenamiento />;
+  }
 
   return (
     <div className="flex-1 p-8">
@@ -40,10 +59,16 @@ const RegisteredUsers: React.FC<RegisteredUsersProps> = ({ users, onEditUser, on
               <span className="text-[#a1a48f]">{user.assignedProfessional}</span>
             </div>
             <div className="flex space-x-2">
-              <button className="bg-[#5a6b47] text-white px-4 py-2 rounded-lg hover:bg-opacity-80 transition-colors">
+              <button
+                onClick={() => handleEvaluate(user)}
+                className="bg-[#5a6b47] text-white px-4 py-2 rounded-lg hover:bg-opacity-80 transition-colors"
+              >
                 Evaluar
               </button>
-              <button className="bg-[#5a6b47] text-white px-4 py-2 rounded-lg hover:bg-opacity-80 transition-colors">
+              <button
+                onClick={() => handleTrain(user)}
+                className="bg-[#5a6b47] text-white px-4 py-2 rounded-lg hover:bg-opacity-80 transition-colors"
+              >
                 Entrenamiento
               </button>
               <button

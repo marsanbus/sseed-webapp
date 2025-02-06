@@ -6,17 +6,17 @@ import Trainers from './components/Trainers';
 import UserRegistration from './components/UserRegistration';
 import RegisteredUsers from './components/RegisteredUsers';
 import InstitutionRegistration from './components/InstitutionRegistration';
+import Evaluacion from './components/Evaluacion'; // Import the Evaluacion component
+import Entrenamiento from './components/Entrenamiento'; // Import the Entrenamiento component
 import { User } from './types/user';
 import logo from './assets/Logotipo_Vertical_Transparente.png';
 
 function App() {
-  // State variables
   const [activeTab, setActiveTab] = useState('register');
   const [users, setUsers] = useState<User[]>([]);
   const [editingUser, setEditingUser] = useState<User | null>(null);
   const [isAuthenticated, setIsAuthenticated] = useState(false);
 
-  // Menu items for the sidebar
   const menuItems = [
     { id: 'trainers', label: 'Profesionales', icon: Users },
     { id: 'register', label: 'Registro de Usuario', icon: CopyPlus },
@@ -25,35 +25,28 @@ function App() {
     { id: 'close-session', label: 'Cerrar Sesión', icon: Power },
   ];
 
-  // Handle user registration or update
   const handleRegisterUser = (userData: Omit<User, 'id'>) => {
     if (editingUser) {
-      // Update existing user
       const updatedUser = { ...userData, id: editingUser.id };
       setUsers(users.map(user => user.id === editingUser.id ? updatedUser : user));
-      setEditingUser(null); // Clear the editing state
+      setEditingUser(null);
     } else {
-      // Add new user
       const newUser = { ...userData, id: crypto.randomUUID() };
       setUsers([...users, newUser]);
     }
-    setActiveTab('registered-users'); // Navigate to the registered users tab
+    setActiveTab('registered-users');
   };
 
-  // Handle user editing
   const handleEditUser = (user: User) => {
     setEditingUser(user);
-    setActiveTab('register'); // Navigate to the registration tab to edit the user
+    setActiveTab('register');
   };
 
-  // Handle user deletion
   const handleDeleteUser = (userId: string) => {
-    setUsers(users.filter(user => user.id !== userId)); // Remove the user
+    setUsers(users.filter(user => user.id !== userId));
   };
 
-  // Handle login
   const handleLogin = (username: string, password: string) => {
-    // Add your authentication logic here
     if (username === 'admin' && password === 'password') {
       setIsAuthenticated(true);
       setActiveTab('registered-users');
@@ -62,7 +55,6 @@ function App() {
     }
   };
 
-  // Handle logout
   const handleLogout = () => {
     setIsAuthenticated(false);
     setActiveTab('register');
@@ -76,25 +68,21 @@ function App() {
         return <UserRegistration onRegister={handleRegisterUser} initialData={editingUser} />;
       case 'registered-users':
         return <RegisteredUsers users={users} onEditUser={handleEditUser} onDeleteUser={handleDeleteUser} />;
-      // Add cases for other tabs
       default:
         return <div>Foro</div>;
     }
   };
 
-  // Effect to handle logout when the active tab is 'close-session'
   useEffect(() => {
     if (activeTab === 'close-session') {
       handleLogout();
     }
   }, [activeTab]);
 
-  // Render the login page if not authenticated
   if (!isAuthenticated) {
     return <InstitutionRegistration onLogin={handleLogin} />;
   }
 
-  // Render the main application
   return (
     <Router>
       <div className="flex min-h-screen bg-[#f5f5f0]">
@@ -109,7 +97,7 @@ function App() {
           {renderContent()}
         </main>
       </div>
-      </Router>
+    </Router>
   );
 }
 
