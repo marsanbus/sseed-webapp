@@ -90,18 +90,40 @@ const TrainerForm: React.FC<TrainerFormProps> = ({ onAddTrainer, onClose, initia
     };
 
     // Handle form submission
-    const handleSubmit = (e: React.FormEvent) => {
+    const handleSubmit = async (e: React.FormEvent) => {
         e.preventDefault();
         if (!errors.nombre && !errors.apellidos && !errors.correo && !errors.fechaNacimiento) {
-            const newTrainer: Trainer = {
-                id: initialData ? initialData.id : crypto.randomUUID(),
-                ...formData,
-            };
-            onAddTrainer(newTrainer);
-            onClose();
+          const newTrainer = {
+            nombre: formData.nombre,
+            apellidos: formData.apellidos,
+            correo: formData.correo,
+            fechaNacimiento: formData.fechaNacimiento,
+            titulacion: formData.titulacion,
+          };
+          console.log('Datos del formulario:', newTrainer);
+      
+          try {
+            const response = await fetch('http://localhost:5000/api/trainers', {
+              method: 'POST',
+              headers: {
+                'Content-Type': 'application/json',
+              },
+              body: JSON.stringify(newTrainer),
+            });
+      
+            if (response.ok) {
+              const data = await response.json();
+              console.log('Respuesta del backend:', data); // Agrega este console.log
+              onAddTrainer({ id: data.id, ...newTrainer });
+              onClose();
+            } else {
+              console.error('Error al guardar el entrenador');
+            }
+          } catch (error) {
+            console.error('Error de red:', error);
+          }
         }
-    };
-
+      };
     // Handle form reset
     const handleReset = () => {
         setFormData({

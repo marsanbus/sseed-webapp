@@ -5,6 +5,9 @@ import react from '@vitejs/plugin-react';
 export default defineConfig({
   plugins: [react()],
   base: '/sseed-webapp/',
+  server: {
+    port: 5173,
+  },
   optimizeDeps: {
     exclude: ['lucide-react'],
   },

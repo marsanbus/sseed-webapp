@@ -7,18 +7,25 @@
   "scripts": {
     "predeploy": "npm run build",
     "deploy": "gh-pages -d dist",
-    "dev": "vite",
     "build": "vite build",
     "lint": "eslint .",
-    "preview": "vite preview"
+    "preview": "vite preview",
+    "start": "vite",
+    "backend": "node server.js",
+    "dev": "concurrently \"npm:backend\" \"npm:start\""
   },
   "dependencies": {
     "@types/react-router-dom": "^5.3.3",
     "autoprefixer": "^10.0.0",
+    "axios": "^1.7.9",
+    "concurrently": "^9.1.2",
+    "cors": "^2.8.5",
+    "express": "^4.21.2",
     "lucide-react": "^0.344.0",
     "react": "^18.3.1",
     "react-dom": "^18.3.1",
     "react-router-dom": "^7.1.5",
+    "sqlite3": "^5.1.7",
     "tailwindcss": "^2.0.0"
   },
   "devDependencies": {
