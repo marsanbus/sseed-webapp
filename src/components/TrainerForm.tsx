@@ -39,7 +39,6 @@ const TrainerForm: React.FC<TrainerFormProps> = ({ onAddTrainer, onClose, initia
         fechaNacimiento: '',
     });
 
-    // Initialize form data if initialData is provided
     useEffect(() => {
         if (initialData) {
             setFormData({
@@ -52,12 +51,10 @@ const TrainerForm: React.FC<TrainerFormProps> = ({ onAddTrainer, onClose, initia
         }
     }, [initialData]);
 
-    // Handle input changes
     const handleInputChange = (e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement>) => {
         const { name, value } = e.target;
         setFormData((prev) => ({ ...prev, [name]: value }));
 
-        // Validation logic
         if (name === 'nombre' || name === 'apellidos' || name === 'correo') {
             if (value.length > 50) {
                 setErrors((prev) => ({ ...prev, [name]: 'No puede tener más de 50 caracteres' }));
@@ -78,7 +75,6 @@ const TrainerForm: React.FC<TrainerFormProps> = ({ onAddTrainer, onClose, initia
         }
     };
 
-    // Handle checkbox changes for 'Titulación'
     const handleCheckboxChange = (e: React.ChangeEvent<HTMLInputElement>) => {
         const { value, checked } = e.target;
         setFormData((prev) => {
@@ -89,22 +85,21 @@ const TrainerForm: React.FC<TrainerFormProps> = ({ onAddTrainer, onClose, initia
         });
     };
 
-    // Handle form submission
     const handleSubmit = async (e: React.FormEvent) => {
         e.preventDefault();
         if (!errors.nombre && !errors.apellidos && !errors.correo && !errors.fechaNacimiento) {
           const newTrainer = {
+            id: initialData?.id || '',
             nombre: formData.nombre,
             apellidos: formData.apellidos,
             correo: formData.correo,
             fechaNacimiento: formData.fechaNacimiento,
             titulacion: formData.titulacion,
           };
-          console.log('Datos del formulario:', newTrainer);
       
           try {
-            const response = await fetch('http://localhost:5000/api/trainers', {
-              method: 'POST',
+            const response = await fetch(`http://localhost:5000/api/trainers/${initialData ? initialData.id : ''}`, {
+              method: initialData ? 'PUT' : 'POST',
               headers: {
                 'Content-Type': 'application/json',
               },
@@ -113,7 +108,6 @@ const TrainerForm: React.FC<TrainerFormProps> = ({ onAddTrainer, onClose, initia
       
             if (response.ok) {
               const data = await response.json();
-              console.log('Respuesta del backend:', data); // Agrega este console.log
               onAddTrainer({ id: data.id, ...newTrainer });
               onClose();
             } else {
@@ -124,7 +118,7 @@ const TrainerForm: React.FC<TrainerFormProps> = ({ onAddTrainer, onClose, initia
           }
         }
       };
-    // Handle form reset
+
     const handleReset = () => {
         setFormData({
             nombre: '',
@@ -145,7 +139,7 @@ const TrainerForm: React.FC<TrainerFormProps> = ({ onAddTrainer, onClose, initia
         <form onSubmit={handleSubmit} onReset={handleReset} className="max-w-lg mx-auto bg-white p-8 rounded-lg shadow-lg">
             <div className="mb-4">
                 <label className="block text-[#dabf94] mb-2">Nombre</label>
-                <input type="text" name="nombre" value={formData.nombre} onChange={handleInputChange} className="w-full p-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-[#5a6b47]" />
+                <input autoFocus type="text" name="nombre" value={formData.nombre} onChange={handleInputChange} className="w-full p-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-[#5a6b47]" />
                 {errors.nombre && <p className="text-red-500 text-sm">{errors.nombre}</p>}
             </div>
             <div className="mb-4">
