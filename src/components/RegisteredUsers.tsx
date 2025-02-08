@@ -3,7 +3,7 @@ import { Pencil, Trash } from 'lucide-react';
 import male from '../assets/male.png';
 import { User } from '../types/user';
 import Evaluacion from './Evaluacion'; // Import the Evaluacion component
-import Entrenamiento from './Entrenamiento'; // Import the Entrenamiento component
+import EntrenamientoModal from './EntrenamientoModal'; // Import the EntrenamientoModal component
 
 interface RegisteredUsersProps {
   users: User[];
@@ -14,6 +14,7 @@ interface RegisteredUsersProps {
 const RegisteredUsers: React.FC<RegisteredUsersProps> = ({ users, onEditUser, onDeleteUser }) => {
   const [activeScreen, setActiveScreen] = useState<string | null>(null);
   const [selectedUser, setSelectedUser] = useState<User | null>(null);
+  const [isEntrenamientoModalOpen, setIsEntrenamientoModalOpen] = useState(false); // Estado para el modal
 
   const handleEditUser = (user: User) => {
     onEditUser(user);
@@ -41,7 +42,7 @@ const RegisteredUsers: React.FC<RegisteredUsersProps> = ({ users, onEditUser, on
   }
 
   if (activeScreen === 'entrenamiento' && selectedUser) {
-    return <Entrenamiento />;
+    return <EntrenamientoModal onClose={() => setActiveScreen(null)} />;
   }
 
   return (
@@ -66,10 +67,10 @@ const RegisteredUsers: React.FC<RegisteredUsersProps> = ({ users, onEditUser, on
                 Evaluar
               </button>
               <button
-                onClick={() => handleTrain(user)}
+                onClick={() => setIsEntrenamientoModalOpen(true)} // Abre el modal al hacer clic
                 className="bg-[#5a6b47] text-white px-4 py-2 rounded-lg hover:bg-opacity-80 transition-colors"
               >
-                Entrenamiento
+                Planificación
               </button>
               <button
                 onClick={() => handleEditUser(user)}
@@ -87,6 +88,11 @@ const RegisteredUsers: React.FC<RegisteredUsersProps> = ({ users, onEditUser, on
           </div>
         ))}
       </div>
+
+      {/* Renderizar el modal si isEntrenamientoModalOpen es true */}
+      {isEntrenamientoModalOpen && (
+        <EntrenamientoModal onClose={() => setIsEntrenamientoModalOpen(false)} />
+      )}
     </div>
   );
 };

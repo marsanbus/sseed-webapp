@@ -7,7 +7,7 @@ import UserRegistration from './components/UserRegistration';
 import RegisteredUsers from './components/RegisteredUsers';
 import InstitutionRegistration from './components/InstitutionRegistration';
 import Evaluacion from './components/Evaluacion'; // Import the Evaluacion component
-import Entrenamiento from './components/Entrenamiento'; // Import the Entrenamiento component
+import Entrenamiento from './components/EntrenamientoModal'; // Import the Entrenamiento component
 import { User } from './types/user';
 import logo from './assets/Logotipo_Vertical_Transparente.png';
 
