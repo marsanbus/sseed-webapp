@@ -1,6 +1,7 @@
 export interface User {
   id: string;
-  name: string;
+  nombre: string;
+  apellidos: string;
   birthDate: string;
   weight: number;
   height: number;

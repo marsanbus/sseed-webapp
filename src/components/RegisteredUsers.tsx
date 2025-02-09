@@ -55,9 +55,9 @@ const RegisteredUsers: React.FC<RegisteredUsersProps> = ({ users, onEditUser, on
           <div key={user.id} className="bg-white rounded-lg shadow-lg p-4 flex justify-between items-center">
             <div className="flex items-center gap-4 text-[#3f3222]">
               <img src={male} alt="Foto del usuario" className="w-10 h-10 rounded-full" />
-              <span className="font-semibold">{user.name}</span>
-              <span className="text-[#a1a48f]">{user.disease}</span>
-              <span className="text-[#a1a48f]">{user.assignedProfessional}</span>
+              <span className="font-semibold">{user.nombre} {user.apellidos}</span>
+              <span className="text-[#a1a48f]">📝 {user.disease}</span>
+              <span className="text-[#a1a48f]">🎓 {user.assignedProfessional}</span>
             </div>
             <div className="flex space-x-2">
               <button
