@@ -1,29 +1,62 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { Pencil, Trash } from 'lucide-react';
 import male from '../assets/male.png';
 import { User } from '../types/user';
-import Evaluacion from './Evaluacion'; // Import the Evaluacion component
-import EntrenamientoModal from './EntrenamientoModal'; // Import the EntrenamientoModal component
+import Evaluacion from './Evaluacion';
+import EntrenamientoModal from './EntrenamientoModal';
+import EditUserModal from './EditUserModal'; // Nuevo componente para el modal de edición
 
 interface RegisteredUsersProps {
-  users: User[];
   onEditUser: (user: User) => void;
   onDeleteUser: (userId: string) => void;
 }
 
-const RegisteredUsers: React.FC<RegisteredUsersProps> = ({ users, onEditUser, onDeleteUser }) => {
+const RegisteredUsers: React.FC<RegisteredUsersProps> = ({ onEditUser, onDeleteUser }) => {
+  const [users, setUsers] = useState<User[]>([]);
   const [activeScreen, setActiveScreen] = useState<string | null>(null);
   const [selectedUser, setSelectedUser] = useState<User | null>(null);
-  const [isEntrenamientoModalOpen, setIsEntrenamientoModalOpen] = useState(false); // Estado para el modal
+  const [isEntrenamientoModalOpen, setIsEntrenamientoModalOpen] = useState(false);
+  const [isEditModalOpen, setIsEditModalOpen] = useState(false); // Estado para controlar el modal de edición
+
+  // Obtener los usuarios desde la base de datos
+  useEffect(() => {
+    const fetchUsers = async () => {
+      try {
+        const response = await fetch('http://localhost:5000/api/users');
+        if (response.ok) {
+          const data = await response.json();
+          setUsers(data);
+        } else {
+          console.error('Error al obtener los usuarios');
+        }
+      } catch (error) {
+        console.error('Error de red:', error);
+      }
+    };
+
+    fetchUsers();
+  }, []);
 
   const handleEditUser = (user: User) => {
-    onEditUser(user);
-    setActiveScreen('register');
+    setSelectedUser(user);
+    setIsEditModalOpen(true); // Abrir el modal de edición
   };
 
-  const handleDelete = (userId: string) => {
+  const handleDeleteUser = async (userId: string) => {
     if (window.confirm('¿Estás seguro de que deseas eliminar este usuario?')) {
-      onDeleteUser(userId);
+      try {
+        const response = await fetch(`http://localhost:5000/api/users/${userId}`, {
+          method: 'DELETE',
+        });
+        if (response.ok) {
+          setUsers(users.filter((user) => user.id !== userId)); // Actualiza el estado local
+          console.log('Usuario eliminado:', userId);
+        } else {
+          console.error('Error al eliminar el usuario');
+        }
+      } catch (error) {
+        console.error('Error de red:', error);
+      }
     }
   };
 
@@ -35,6 +68,27 @@ const RegisteredUsers: React.FC<RegisteredUsersProps> = ({ users, onEditUser, on
   const handleTrain = (user: User) => {
     setSelectedUser(user);
     setActiveScreen('entrenamiento');
+  };
+
+  const handleUpdateUser = async (updatedUser: User) => {
+    try {
+      const response = await fetch(`http://localhost:5000/api/users/${updatedUser.id}`, {
+        method: 'PUT',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(updatedUser),
+      });
+
+      if (response.ok) {
+        setUsers(users.map(user => user.id === updatedUser.id ? updatedUser : user));
+        setIsEditModalOpen(false); // Cerrar el modal después de la actualización
+      } else {
+        console.error('Error al actualizar el usuario');
+      }
+    } catch (error) {
+      console.error('Error de red:', error);
+    }
   };
 
   if (activeScreen === 'evaluacion' && selectedUser) {
@@ -67,7 +121,7 @@ const RegisteredUsers: React.FC<RegisteredUsersProps> = ({ users, onEditUser, on
                 Evaluar
               </button>
               <button
-                onClick={() => setIsEntrenamientoModalOpen(true)} // Abre el modal al hacer clic
+                onClick={() => setIsEntrenamientoModalOpen(true)}
                 className="bg-[#5a6b47] text-white px-4 py-2 rounded-lg hover:bg-opacity-80 transition-colors"
               >
                 Planificación
@@ -79,7 +133,7 @@ const RegisteredUsers: React.FC<RegisteredUsersProps> = ({ users, onEditUser, on
                 <Pencil className="h-5 w-5" />
               </button>
               <button
-                onClick={() => handleDelete(user.id)}
+                onClick={() => handleDeleteUser(user.id)}
                 className="text-red-500 hover:text-red-700 transition-colors"
               >
                 <Trash className="h-5 w-5" />
@@ -89,7 +143,16 @@ const RegisteredUsers: React.FC<RegisteredUsersProps> = ({ users, onEditUser, on
         ))}
       </div>
 
-      {/* Renderizar el modal si isEntrenamientoModalOpen es true */}
+      {/* Renderizar el modal de edición si isEditModalOpen es true */}
+      {isEditModalOpen && selectedUser && (
+        <EditUserModal
+          user={selectedUser}
+          onUpdate={handleUpdateUser}
+          onClose={() => setIsEditModalOpen(false)}
+        />
+      )}
+
+      {/* Renderizar el modal de entrenamiento si isEntrenamientoModalOpen es true */}
       {isEntrenamientoModalOpen && (
         <EntrenamientoModal onClose={() => setIsEntrenamientoModalOpen(false)} />
       )}

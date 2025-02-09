@@ -143,3 +143,123 @@ app.delete('/api/trainers/:id', (req, res) => {
     res.json({ message: 'Entrenador eliminado correctamente' });
   });
 });
+
+// Ruta para registrar un nuevo usuario
+app.post('/api/users', (req, res) => {
+  const {
+    nombre,
+    apellidos,
+    birthDate,
+    weight,
+    height,
+    email,
+    disease,
+    treatment,
+    specificAnswers,
+    assignedProfessional,
+  } = req.body;
+
+  // Convertir specificAnswers a una cadena JSON
+  const specificAnswersString = JSON.stringify(specificAnswers);
+
+  const query = `
+    INSERT INTO users (nombre, apellidos, birthDate, weight, height, email, disease, treatment, specificAnswers, assignedProfessional)
+    VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
+  `;
+
+  const params = [
+    nombre,
+    apellidos,
+    birthDate,
+    weight,
+    height,
+    email,
+    disease,
+    treatment,
+    specificAnswersString,
+    assignedProfessional,
+  ];
+
+  db.run(query, params, function (err) {
+    if (err) {
+      console.error('Error al insertar el usuario:', err);
+      return res.status(500).json({ error: 'Error al insertar el usuario' });
+    }
+    res.json({ id: this.lastID });
+  });
+});
+
+// Ruta para obtener todos los usuarios
+app.get('/api/users', (req, res) => {
+  const query = 'SELECT * FROM users';
+
+  db.all(query, (err, rows) => {
+    if (err) {
+      console.error('Error al obtener los usuarios:', err);
+      return res.status(500).json({ error: 'Error al obtener los usuarios' });
+    }
+    res.json(rows);
+  });
+});
+
+// Ruta para actualizar un usuario
+app.put('/api/users/:id', (req, res) => {
+  const { id } = req.params;
+  const {
+    nombre,
+    apellidos,
+    birthDate,
+    weight,
+    height,
+    email,
+    disease,
+    treatment,
+    specificAnswers,
+    assignedProfessional,
+  } = req.body;
+
+  // Convertir specificAnswers a una cadena JSON
+  const specificAnswersString = JSON.stringify(specificAnswers);
+
+  const query = `
+    UPDATE users 
+    SET nombre = ?, apellidos = ?, birthDate = ?, weight = ?, height = ?, email = ?, disease = ?, treatment = ?, specificAnswers = ?, assignedProfessional = ?
+    WHERE id = ?
+  `;
+
+  const params = [
+    nombre,
+    apellidos,
+    birthDate,
+    weight,
+    height,
+    email,
+    disease,
+    treatment,
+    specificAnswersString,
+    assignedProfessional,
+    id,
+  ];
+
+  db.run(query, params, function (err) {
+    if (err) {
+      console.error('Error al actualizar el usuario:', err);
+      return res.status(500).json({ error: 'Error al actualizar el usuario' });
+    }
+    res.json({ message: 'Usuario actualizado correctamente' });
+  });
+});
+
+// Ruta para eliminar un usuario
+app.delete('/api/users/:id', (req, res) => {
+  const { id } = req.params;
+  const query = 'DELETE FROM users WHERE id = ?';
+
+  db.run(query, [id], function (err) {
+    if (err) {
+      console.error('Error al eliminar el usuario:', err);
+      return res.status(500).json({ error: 'Error al eliminar el usuario' });
+    }
+    res.json({ message: 'Usuario eliminado correctamente' });
+  });
+});

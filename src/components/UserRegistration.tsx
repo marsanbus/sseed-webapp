@@ -70,13 +70,42 @@ const UserRegistration: React.FC<UserRegistrationProps> = ({ onRegister, onClose
     });
   };
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
+  
     const newUser = {
-      ...formData,
-      id: crypto.randomUUID(),
+      nombre: formData.nombre,
+      apellidos: formData.apellidos,
+      birthDate: formData.birthDate,
+      weight: formData.weight,
+      height: formData.height,
+      email: formData.email,
+      disease: formData.disease,
+      treatment: formData.treatment,
+      specificAnswers: formData.specificAnswers,
+      assignedProfessional: formData.assignedProfessional,
     };
-    onRegister(newUser);
+  
+    try {
+      const response = await fetch('http://localhost:5000/api/users', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(newUser),
+      });
+  
+      if (response.ok) {
+        const data = await response.json();
+        console.log('Usuario registrado con ID:', data.id);
+        onRegister(newUser); // Llama a la función onRegister para manejar el registro en el frontend
+        onClose(); // Cierra el formulario después de registrar al usuario
+      } else {
+        console.error('Error al registrar el usuario');
+      }
+    } catch (error) {
+      console.error('Error de red:', error);
+    }
   };
 
   const handleReset = () => {
