@@ -67,7 +67,7 @@ const RegisteredUsers: React.FC<RegisteredUsersProps> = ({ onEditUser, onDeleteU
 
   const handleTrain = (user: User) => {
     setSelectedUser(user);
-    setActiveScreen('entrenamiento');
+    setIsEntrenamientoModalOpen(true);
   };
 
   const handleUpdateUser = async (updatedUser: User) => {
@@ -96,7 +96,7 @@ const RegisteredUsers: React.FC<RegisteredUsersProps> = ({ onEditUser, onDeleteU
   }
 
   if (activeScreen === 'entrenamiento' && selectedUser) {
-    return <EntrenamientoModal onClose={() => setActiveScreen(null)} />;
+    return <EntrenamientoModal onClose={() => setActiveScreen(null)} user={selectedUser} />;
   }
 
   return (
@@ -121,7 +121,7 @@ const RegisteredUsers: React.FC<RegisteredUsersProps> = ({ onEditUser, onDeleteU
                 Evaluar
               </button>
               <button
-                onClick={() => setIsEntrenamientoModalOpen(true)}
+                onClick={() => handleTrain(user)}
                 className="bg-[#5a6b47] text-white px-4 py-2 rounded-lg hover:bg-opacity-80 transition-colors"
               >
                 Planificación
@@ -153,8 +153,8 @@ const RegisteredUsers: React.FC<RegisteredUsersProps> = ({ onEditUser, onDeleteU
       )}
 
       {/* Renderizar el modal de entrenamiento si isEntrenamientoModalOpen es true */}
-      {isEntrenamientoModalOpen && (
-        <EntrenamientoModal onClose={() => setIsEntrenamientoModalOpen(false)} />
+      {isEntrenamientoModalOpen && selectedUser && (
+        <EntrenamientoModal onClose={() => setIsEntrenamientoModalOpen(false)} user={selectedUser} />
       )}
     </div>
   );
