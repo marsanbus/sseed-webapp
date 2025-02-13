@@ -1,6 +1,6 @@
 # SSED WebApp
 
-![Project Logo](https://via.placeholder.com/150) <!-- Reemplaza con la URL de tu logo si tienes uno -->
+![Project Logo](/src/assets/Logotipo_Horizontal_Transparente.png) <!-- Reemplaza con la URL de tu logo si tienes uno -->
 
 ## Instalación y Ejecución
 
