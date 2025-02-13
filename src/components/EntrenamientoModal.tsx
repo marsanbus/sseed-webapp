@@ -13,9 +13,9 @@ interface EntrenamientoModalProps {
 }
 
 const EntrenamientoModal: React.FC<EntrenamientoModalProps> = ({ onClose, user }) => {
-  const [selectedTab, setSelectedTab] = useState<string>('Planificacion centro');
+  const [selectedTab, setSelectedTab] = useState<string>('Planificacion Supervisada');
 
-  const tabs = ['Planificacion centro', 'Planificacion casa', 'Consideraciones y contraindicaciones'];
+  const tabs = ['Planificacion Supervisada', 'Planificacion No Supervisada', 'Consideraciones y contraindicaciones'];
 
   return (
     <div className="fixed inset-0 bg-black bg-opacity-50 flex justify-center items-center">
@@ -36,8 +36,8 @@ const EntrenamientoModal: React.FC<EntrenamientoModalProps> = ({ onClose, user }
           ))}
         </div>
         <div className="flex-grow h-[calc(100%-10rem)]">
-          {selectedTab === 'Planificacion centro' && <PlanificacionCentro />}
-          {selectedTab === 'Planificacion casa' && <PlanificacionCasa />}
+          {selectedTab === 'Planificacion Supervisada' && <PlanificacionCentro />}
+          {selectedTab === 'Planificacion No Supervisada' && <PlanificacionCasa />}
           {selectedTab === 'Consideraciones y contraindicaciones' && <ConsideracionesContraindicaciones />}
         </div>
         <div className="absolute bottom-5 right-5 flex space-x-4">

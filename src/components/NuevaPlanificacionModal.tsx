@@ -10,6 +10,9 @@ const NuevaPlanificacionModal: React.FC<NuevaPlanificacionModalProps> = ({ onClo
   const [estadoHoy, setEstadoHoy] = useState<number | null>(null);
   const [tiempoHoy, setTiempoHoy] = useState<string>('');
 
+  // Emojis para la escala del 1 al 10
+  const emojis = ['😭', '😢', '😞', '😐', '🙂', '😊', '😄', '😁', '😆', '😍'];
+
   const handleAceptar = () => {
     // Aquí puedes manejar la lógica para guardar las respuestas
     console.log({ ultimoTratamiento, estadoHoy, tiempoHoy });
@@ -48,12 +51,14 @@ const NuevaPlanificacionModal: React.FC<NuevaPlanificacionModalProps> = ({ onClo
             {[...Array(10)].map((_, i) => (
               <div key={i} className="flex flex-col items-center">
                 <span className="text-sm mb-1">{i + 1}</span> {/* Número encima del radio */}
+                <span className="text-lg">{emojis[i]}</span> {/* Emoji debajo del número */}
                 <input
                   type="radio"
                   name="estadoHoy"
                   value={i + 1}
                   checked={estadoHoy === i + 1}
                   onChange={() => setEstadoHoy(i + 1)}
+                  className="mt-1"
                 />
               </div>
             ))}
