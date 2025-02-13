@@ -8,6 +8,7 @@ interface UserFormFieldsProps {
     weight: string;
     height: string;
     email: string;
+    password: string;
   };
   handleInputChange: (e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement>) => void;
 }

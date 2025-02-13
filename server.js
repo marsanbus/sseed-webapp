@@ -33,7 +33,7 @@ app.get('/api/trainers', (req, res) => {
 
 // Ruta para obtener todos los entrenadores
 app.post('/api/trainers', (req, res) => {
-  const { nombre, apellidos, correo, fechaNacimiento, titulacion } = req.body;
+  const { nombre, apellidos, correo, fechaNacimiento, titulacion, password } = req.body; // Asegúrate de extraer password
 
   const titulaciones = {
     Fisioterapeuta: titulacion.includes('Fisioterapeuta') ? 1 : 0,
@@ -45,8 +45,8 @@ app.post('/api/trainers', (req, res) => {
   };
 
   const query = `
-    INSERT INTO trainer (nombre, apellidos, correo, Fecha_nacimiento, Fisioterapeuta, CAFD, TSEAS, Médico, TAF, Otros)
-    VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
+    INSERT INTO trainer (nombre, apellidos, correo, Fecha_nacimiento, Fisioterapeuta, CAFD, TSEAS, Médico, TAF, Otros, password)
+    VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
   `;
 
   const params = [
@@ -60,11 +60,12 @@ app.post('/api/trainers', (req, res) => {
     titulaciones.Médico,
     titulaciones.TAF,
     titulaciones.Otros,
+    password, // Asegúrate de incluir password aquí
   ];
 
   db.run(query, params, function (err) {
     if (err) {
-      console.error('Error al insertar el entrenador:', err); // Agrega este console.log
+      console.error('Error al insertar el entrenador:', err);
       return res.status(500).json({ error: 'Error al insertar el entrenador' });
     }
     res.json({ id: this.lastID });

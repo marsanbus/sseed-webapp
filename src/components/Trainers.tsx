@@ -11,6 +11,7 @@ interface Trainer {
     fechaNacimiento: string;
     titulacion: string[];
     foto?: string;
+    password?: string;
 }
 
 const Trainers: React.FC = () => {
@@ -69,6 +70,7 @@ const Trainers: React.FC = () => {
                         nombre: trainer.nombre,
                         apellidos: trainer.apellidos,
                         correo: trainer.correo,
+                        password: trainer.password,
                         fechaNacimiento: trainer.Fecha_nacimiento,
                         titulacion: [
                             trainer.Fisioterapeuta && 'Fisioterapeuta',

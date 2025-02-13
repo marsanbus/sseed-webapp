@@ -21,6 +21,7 @@ interface FormData {
     correo: string;
     fechaNacimiento: string;
     titulacion: string[];
+    password: string;
 }
 
 const TrainerForm: React.FC<TrainerFormProps> = ({ onAddTrainer, onClose, initialData }) => {
@@ -30,6 +31,7 @@ const TrainerForm: React.FC<TrainerFormProps> = ({ onAddTrainer, onClose, initia
         correo: '',
         fechaNacimiento: '',
         titulacion: [],
+        password: '',
     });
 
     const [errors, setErrors] = useState({
@@ -47,6 +49,7 @@ const TrainerForm: React.FC<TrainerFormProps> = ({ onAddTrainer, onClose, initia
                 correo: initialData.correo,
                 fechaNacimiento: initialData.fechaNacimiento,
                 titulacion: initialData.titulacion,
+                password: '',
             });
         }
     }, [initialData]);
@@ -95,6 +98,7 @@ const TrainerForm: React.FC<TrainerFormProps> = ({ onAddTrainer, onClose, initia
             correo: formData.correo,
             fechaNacimiento: formData.fechaNacimiento,
             titulacion: formData.titulacion,
+            password: formData.password, // Asegúrate de incluir password aquí
           };
       
           try {
@@ -151,6 +155,18 @@ const TrainerForm: React.FC<TrainerFormProps> = ({ onAddTrainer, onClose, initia
                 <label className="block text-[#dabf94] mb-2">Correo</label>
                 <input type="email" name="correo" value={formData.correo} onChange={handleInputChange} className="w-full p-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-[#5a6b47]" />
                 {errors.correo && <p className="text-red-500 text-sm">{errors.correo}</p>}
+            </div>
+            <div className="mb-4">
+                <label className="block text-[#dabf94] mb-2">Contraseña</label>
+                <input
+                type="password"
+                name="password"
+                value={formData.password}
+                onChange={handleInputChange}
+                className="w-full p-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-[#5a6b47]"
+                placeholder="Ingresa una contraseña"
+                required
+                />
             </div>
             <div className="mb-4">
                 <label className="block text-[#dabf94] mb-2">Fecha de Nacimiento</label>
