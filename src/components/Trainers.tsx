@@ -108,26 +108,36 @@ const Trainers: React.FC = () => {
                     <div
                         key={trainer.id}
                         className="bg-white rounded-lg shadow-lg p-4 flex justify-between items-center">
-                        <div className="flex items-center gap-4 text-[#3f3222]">
+                        <div className="flex items-center gap-4 text-[#3f3222] w-full">
                             <img src={trainer.foto || male} alt="Foto del profesional" className="w-10 h-10 rounded-full" />
-                            <span className="font-semibold">{trainer.nombre} {trainer.apellidos}</span>
-                            <span className="text-[#a1a48f]">📚 {trainer.titulacion?.join(', ')}</span>
-                            <span className="text-[#a1a48f]">✉️ {trainer.correo}</span>
-                            <span className="text-[#a1a48f]">📅 {new Date(trainer.fechaNacimiento).toLocaleDateString()}</span>
-                        </div>
-                        <div className="flex space-x-2">
-                            <button
-                                onClick={() => handleEditTrainer(trainer)}
-                                className="text-[#5a6b47] hover:text-opacity-80 transition-colors"
-                            >
-                                <Pencil className="h-5 w-5" />
-                            </button>
-                            <button
-                                onClick={() => handleDeleteTrainer(trainer.id)}
-                                className="text-red-500 hover:text-red-700 transition-colors"
-                            >
-                                <Trash className="h-5 w-5" />
-                            </button>
+                            <div className="flex-1 flex items-center gap-4 overflow-hidden">
+                                <div className="w-2/6 truncate border-r pr-4">
+                                    <span className="font-semibold truncate">{trainer.nombre} {trainer.apellidos}</span>
+                                </div>
+                                <div className="w-2/6 truncate border-r pr-4">
+                                    <span className="text-[#a1a48f] truncate">📚 {trainer.titulacion?.join(', ')}</span>
+                                </div>
+                                <div className="w-1/6 truncate border-r pr-4">
+                                    <span className="text-[#a1a48f] truncate">✉️ {trainer.correo}</span>
+                                </div>
+                                <div className="w-1/6 truncate">
+                                    <span className="text-[#a1a48f] truncate">📅 {new Date(trainer.fechaNacimiento).toLocaleDateString()}</span>
+                                </div>
+                            </div>
+                            <div className="flex space-x-2">
+                                <button
+                                    onClick={() => handleEditTrainer(trainer)}
+                                    className="text-[#5a6b47] hover:text-opacity-80 transition-colors"
+                                >
+                                    <Pencil className="h-5 w-5" />
+                                </button>
+                                <button
+                                    onClick={() => handleDeleteTrainer(trainer.id)}
+                                    className="text-red-500 hover:text-red-700 transition-colors"
+                                >
+                                    <Trash className="h-5 w-5" />
+                                </button>
+                            </div>
                         </div>
                     </div>
                 ))}
