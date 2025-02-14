@@ -20,7 +20,7 @@ const db = new sqlite3.Database('./sseed.db', (err) => {
 
 // Ruta para obtener todos los entrenadores
 app.get('/api/trainers', (req, res) => {
-  const query = 'SELECT * FROM trainer';
+  const query = 'SELECT id, nombre, apellidos, correo, Fecha_nacimiento, Fisioterapeuta, CAFD, TSEAS, Médico, TAF, Otros, role FROM trainer'; // Excluye password
 
   db.all(query, (err, rows) => {
     if (err) {
@@ -262,5 +262,29 @@ app.delete('/api/users/:id', (req, res) => {
       return res.status(500).json({ error: 'Error al eliminar el usuario' });
     }
     res.json({ message: 'Usuario eliminado correctamente' });
+  });
+});
+
+// Ruta para autenticar profesionales
+app.post('/api/trainers/login', (req, res) => {
+  const { correo, password } = req.body;
+
+  const query = 'SELECT * FROM trainer WHERE correo = ? AND password = ?';
+  const params = [correo, password];
+
+  db.get(query, params, (err, row) => {
+    if (err) {
+      console.error('Error al autenticar el profesional:', err);
+      return res.status(500).json({ error: 'Error al autenticar el profesional' });
+    }
+
+    if (row) {
+      // Si el profesional existe, devolver sus datos (sin la contraseña)
+      const { password, ...userData } = row;
+      res.json({ success: true, user: userData });
+    } else {
+      // Si no existe, devolver un error
+      res.status(401).json({ success: false, message: 'Credenciales incorrectas' });
+    }
   });
 });

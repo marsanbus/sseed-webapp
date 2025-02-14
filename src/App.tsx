@@ -46,12 +46,27 @@ function App() {
     setUsers(users.filter(user => user.id !== userId));
   };
 
-  const handleLogin = (username: string, password: string) => {
-    if (username === 'admin' && password === 'password') {
-      setIsAuthenticated(true);
-      setActiveTab('registered-users');
-    } else {
-      alert('Invalid credentials');
+  const handleLogin = async (correo: string, password: string) => {
+    try {
+      const response = await fetch('http://localhost:5000/api/trainers/login', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({ correo, password }),
+      });
+  
+      const data = await response.json();
+  
+      if (data.success) {
+        setIsAuthenticated(true);
+        setActiveTab('registered-users');
+      } else {
+        alert('Credenciales incorrectas');
+      }
+    } catch (error) {
+      console.error('Error de red:', error);
+      alert('Error de red. Inténtalo de nuevo más tarde.');
     }
   };
 
