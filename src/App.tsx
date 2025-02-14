@@ -6,8 +6,8 @@ import Trainers from './components/Trainers';
 import UserRegistration from './components/UserRegistration';
 import RegisteredUsers from './components/RegisteredUsers';
 import InstitutionRegistration from './components/InstitutionRegistration';
-import Evaluacion from './components/Evaluacion'; // Import the Evaluacion component
-import Entrenamiento from './components/EntrenamientoModal'; // Import the Entrenamiento component
+import Evaluacion from './components/Evaluacion';
+import Entrenamiento from './components/EntrenamientoModal';
 import { User } from './types/user';
 import logo from './assets/Logotipo_Vertical_Transparente.png';
 
@@ -16,15 +16,22 @@ function App() {
   const [users, setUsers] = useState<User[]>([]);
   const [editingUser, setEditingUser] = useState<User | null>(null);
   const [isAuthenticated, setIsAuthenticated] = useState(false);
-  const [authenticatedUser, setAuthenticatedUser] = useState<{ nombre: string; apellidos: string } | null>(null);
+  const [authenticatedUser, setAuthenticatedUser] = useState<{ nombre: string; apellidos: string; role: string } | null>(null);
 
-  const menuItems = [
-    { id: 'trainers', label: 'Profesionales', icon: Users },
-    { id: 'register', label: 'Registro de Usuario', icon: CopyPlus },
-    { id: 'registered-users', label: 'Usuarios Registrados', icon: UserSquare2 },
-    { id: 'forum', label: 'Foro', icon: MessageCircle },
-    { id: 'close-session', label: 'Cerrar Sesión', icon: Power },
-  ];
+  const getMenuItems = () => {
+    const baseMenuItems = [
+      { id: 'register', label: 'Registro de Usuario', icon: CopyPlus },
+      { id: 'registered-users', label: 'Usuarios Registrados', icon: UserSquare2 },
+      { id: 'forum', label: 'Foro', icon: MessageCircle },
+      { id: 'close-session', label: 'Cerrar Sesión', icon: Power },
+    ];
+
+    if (authenticatedUser?.role === 'admin') {
+      return [{ id: 'trainers', label: 'Profesionales', icon: Users }, ...baseMenuItems];
+    }
+
+    return baseMenuItems;
+  };
 
   const handleRegisterUser = (userData: Omit<User, 'id'>) => {
     if (editingUser) {
@@ -56,12 +63,16 @@ function App() {
         },
         body: JSON.stringify({ correo, password }),
       });
-  
+
       const data = await response.json();
-  
+
       if (data.success) {
         setIsAuthenticated(true);
-        setAuthenticatedUser({ nombre: data.user.nombre, apellidos: data.user.apellidos }); // Almacenar los datos del usuario
+        setAuthenticatedUser({
+          nombre: data.user.nombre,
+          apellidos: data.user.apellidos,
+          role: data.user.role,
+        });
         setActiveTab('registered-users');
       } else {
         alert('Credenciales incorrectas');
@@ -74,7 +85,7 @@ function App() {
 
   const handleLogout = () => {
     setIsAuthenticated(false);
-    setAuthenticatedUser(null); // Limpiar los datos del usuario
+    setAuthenticatedUser(null);
     setActiveTab('register');
   };
 
@@ -104,7 +115,7 @@ function App() {
   return (
     <Router>
       <div className="flex min-h-screen bg-[#f5f5f0]">
-        <Sidebar menuItems={menuItems} activeTab={activeTab} setActiveTab={setActiveTab} />
+        <Sidebar menuItems={getMenuItems()} activeTab={activeTab} setActiveTab={setActiveTab} />
         <main className="flex-1 ml-64 p-8">
           <div className="mb-8 flex items-center justify-between">
             <div className="flex items-center">
