@@ -16,6 +16,7 @@ function App() {
   const [users, setUsers] = useState<User[]>([]);
   const [editingUser, setEditingUser] = useState<User | null>(null);
   const [isAuthenticated, setIsAuthenticated] = useState(false);
+  const [authenticatedUser, setAuthenticatedUser] = useState<{ nombre: string; apellidos: string } | null>(null);
 
   const menuItems = [
     { id: 'trainers', label: 'Profesionales', icon: Users },
@@ -60,6 +61,7 @@ function App() {
   
       if (data.success) {
         setIsAuthenticated(true);
+        setAuthenticatedUser({ nombre: data.user.nombre, apellidos: data.user.apellidos }); // Almacenar los datos del usuario
         setActiveTab('registered-users');
       } else {
         alert('Credenciales incorrectas');
@@ -72,6 +74,7 @@ function App() {
 
   const handleLogout = () => {
     setIsAuthenticated(false);
+    setAuthenticatedUser(null); // Limpiar los datos del usuario
     setActiveTab('register');
   };
 
@@ -103,11 +106,18 @@ function App() {
       <div className="flex min-h-screen bg-[#f5f5f0]">
         <Sidebar menuItems={menuItems} activeTab={activeTab} setActiveTab={setActiveTab} />
         <main className="flex-1 ml-64 p-8">
-          <div className="mb-8 flex items-center justify-start">
+          <div className="mb-8 flex items-center justify-between">
             <div className="flex items-center">
               <img src={logo} alt="SSEED Logo" className="h-8 w-8 mr-3" />
               <h1 className="text-3xl font-bold text-[#3f3222]">SSEED</h1>
             </div>
+            {authenticatedUser && (
+              <div className="flex items-center">
+                <span className="text-[#3f3222] font-semibold">
+                  {authenticatedUser.nombre} {authenticatedUser.apellidos}
+                </span>
+              </div>
+            )}
           </div>
           {renderContent()}
         </main>
