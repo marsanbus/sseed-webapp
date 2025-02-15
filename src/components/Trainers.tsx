@@ -1,7 +1,8 @@
 import React, { useState, useEffect } from 'react';
-import TrainerForm from './TrainerForm';
 import { Pencil, Trash } from 'lucide-react';
 import male from '../assets/male.png';
+import TrainerForm from './TrainerForm';
+import EditTrainerModal from './EditTrainerModal'; // Importa el nuevo modal
 
 interface Trainer {
     id: string;
@@ -18,6 +19,7 @@ const Trainers: React.FC = () => {
     const [trainers, setTrainers] = useState<Trainer[]>([]);
     const [showForm, setShowForm] = useState(false);
     const [editingTrainer, setEditingTrainer] = useState<Trainer | null>(null);
+    const [isEditModalOpen, setIsEditModalOpen] = useState(false); // Estado para controlar el modal de edición
 
     const handleAddTrainer = (trainer: Trainer) => {
         if (editingTrainer) {
@@ -37,7 +39,7 @@ const Trainers: React.FC = () => {
 
     const handleEditTrainer = (trainer: Trainer) => {
         setEditingTrainer(trainer);
-        setShowForm(true);
+        setIsEditModalOpen(true); // Abrir el modal de edición
     };
 
     const handleDeleteTrainer = async (trainerId: string) => {
@@ -57,6 +59,27 @@ const Trainers: React.FC = () => {
           }
         }
       };
+
+    const handleUpdateTrainer = async (updatedTrainer: Trainer) => {
+        try {
+            const response = await fetch(`http://localhost:5000/api/trainers/${updatedTrainer.id}`, {
+                method: 'PUT',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify(updatedTrainer),
+            });
+
+            if (response.ok) {
+                setTrainers(trainers.map(trainer => trainer.id === updatedTrainer.id ? updatedTrainer : trainer));
+                setIsEditModalOpen(false); // Cerrar el modal después de la actualización
+            } else {
+                console.error('Error al actualizar el entrenador');
+            }
+        } catch (error) {
+            console.error('Error de red:', error);
+        }
+    };
 
     useEffect(() => {
         const fetchTrainers = async () => {
@@ -144,6 +167,15 @@ const Trainers: React.FC = () => {
                     </div>
                 ))}
             </div>
+
+            {/* Renderizar el modal de edición si isEditModalOpen es true */}
+            {isEditModalOpen && editingTrainer && (
+                <EditTrainerModal
+                    trainer={editingTrainer}
+                    onUpdate={handleUpdateTrainer}
+                    onClose={() => setIsEditModalOpen(false)}
+                />
+            )}
         </div>
     );
 };
