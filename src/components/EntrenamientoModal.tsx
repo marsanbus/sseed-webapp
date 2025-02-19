@@ -40,17 +40,11 @@ const EntrenamientoModal: React.FC<EntrenamientoModalProps> = ({ onClose, user }
           {selectedTab === 'Planificacion No Supervisada' && <PlanificacionCasa />}
           {selectedTab === 'Consideraciones y contraindicaciones' && <ConsideracionesContraindicaciones />}
         </div>
-        <div className="absolute bottom-5 right-5 flex space-x-4">
-          <button
-            onClick={onClose}
-            className="bg-[#5a6b47] text-white px-4 py-2 rounded-lg"
-          >
+        <div className="absolute bottom-5 center flex space-x-4">
+          <button onClick={onClose} className="bg-[#5a6b47] text-white px-4 py-2 rounded-lg" >
             Aceptar
           </button>
-          <button
-            onClick={onClose}
-            className="bg-red-500 text-white px-4 py-2 rounded-lg"
-          >
+          <button onClick={onClose} className="bg-red-500 text-white px-4 py-2 rounded-lg">
             Cerrar
           </button>
         </div>
